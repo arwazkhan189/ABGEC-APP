@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <TextView
+        android:id="@+id/get_otp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/box"
+        android:backgroundTint="@color/main_yellow"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:padding="13dp"
+        android:text="@string/get_otp"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="@+id/layoutSearch"
+        app:layout_constraintStart_toStartOf="@+id/layoutSearch"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+    <LinearLayout
+        android:id="@+id/layoutSearch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_rect"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp"
+        android:layout_marginTop="30dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView19"
+        app:layout_constraintStart_toStartOf="@+id/textView19"
+        app:layout_constraintTop_toBottomOf="@+id/textView19">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="5dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_flag" />
+
+
+        <EditText
+            android:id="@+id/phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="18dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="20dp"
+            android:background="@null"
+            android:fontFamily="@font/poppins"
+            android:textColorHighlight="@color/white"
+            android:hint="@string/phone_number"
+            android:includeFontPadding="false"
+            android:inputType="number"
+            android:letterSpacing=".05"
+            android:maxLength="10"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            android:textSize="16sp"
+            tools:ignore="TextFields"
+             />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/poppins_medium"
+        android:gravity="center"
+        android:text="@string/otp_verification"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/black"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poppins_medium"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:text="@string/we_will_send_one_time_password_on_this_mobile_number"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+ <!--   <com.tomer.fadingtextview.FadingTextView
+        android:id="@+id/fadingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/main_blue"
+        android:textSize="40sp"
+        android:fontFamily="@font/lexend"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/get_otp"
+        app:timeout="500" />-->
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutSearch">
+
+        <com.furkanakdemir.surroundcardview.SurroundCardView
+            android:id="@+id/alumni"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:visibility="gone"
+            android:layout_weight="1"
+            android:background="@drawable/bg_card"
+            android:theme="@style/Theme.MaterialComponents.Light"
+            app:cardCornerRadius="12dp"
+            app:layout_constraintEnd_toStartOf="@+id/admin"
+            app:layout_constraintStart_toStartOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/select"
+            app:scv_color="@color/main_blue"
+            app:scv_duration="500"
+            app:scv_startPoint="top_start"
+            app:scv_surrounded="false"
+            app:scv_width="0dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/lexend"
+                android:gravity="start"
+                android:padding="20dp"
+                android:text="ALUMNI"
+                android:textColor="#313743"
+                android:textSize="15sp"
+                app:drawableLeftCompat="@drawable/ic_user"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        </com.furkanakdemir.surroundcardview.SurroundCardView>
+
+        <com.furkanakdemir.surroundcardview.SurroundCardView
+            android:id="@+id/student"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:background="@drawable/bg_card"
+            android:theme="@style/Theme.MaterialComponents.Light"
+            app:cardCornerRadius="12dp"
+            app:layout_constraintEnd_toStartOf="@+id/admin"
+            app:layout_constraintStart_toStartOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/select"
+            app:scv_color="@color/main_blue"
+            app:scv_duration="500"
+            app:scv_startPoint="top_start"
+            app:scv_surrounded="false"
+            app:scv_width="0dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/lexend"
+                android:gravity="start"
+                android:padding="20dp"
+                android:text="STUDENT"
+                android:textColor="#313743"
+                android:textSize="15sp"
+                app:drawableLeftCompat="@drawable/ic_user"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        </com.furkanakdemir.surroundcardview.SurroundCardView>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

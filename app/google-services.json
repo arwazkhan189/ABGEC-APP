@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "280143005301",
+    "firebase_url": "https://abgec-39759-default-rtdb.firebaseio.com",
+    "project_id": "abgec-39759",
+    "storage_bucket": "abgec-39759.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:280143005301:android:7373b309951fde06a75a3c",
+        "android_client_info": {
+          "package_name": "com.ontech.com.abgec"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "280143005301-atia5p6qiatm8qftompd9bti19e9g34a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ontech.com.abgec",
+            "certificate_hash": "47029b032ceecee323101c5ed2faed80c6c8f71b"
+          }
+        },
+        {
+          "client_id": "280143005301-qkq51uimqruqpattd9uovbcs2em5q33c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYmmnUKkWP8IuznE6onxIIDGfqIMhL2iE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "280143005301-qkq51uimqruqpattd9uovbcs2em5q33c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

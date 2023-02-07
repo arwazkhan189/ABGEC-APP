@@ -1,0 +1,63 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+}
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+
+        applicationId "com.ontech.com.abgec"
+        minSdk 21
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.firebase:firebase-auth:21.1.0'
+    implementation 'com.google.firebase:firebase-database:20.1.0'
+    implementation 'com.google.firebase:firebase-messaging:23.1.1'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+    //lottie
+    implementation "com.airbnb.android:lottie:3.7.0"
+
+    //fading_textView
+    implementation 'com.tomer:fadingtextview:2.5'
+
+    //pin view
+    implementation 'io.github.chaosleung:pinview:1.4.4'
+
+    //surround card view
+    implementation "com.furkanakdemir:surroundcardview:1.0.6"
+
+    // motion toast
+    implementation 'com.github.Spikeysanju:MotionToast:1.4'
+
+    //Smooth tab bar
+    implementation 'com.github.ibrahimsn98:SmoothBottomBar:1.7.9'
+
+    //circle image view
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+}

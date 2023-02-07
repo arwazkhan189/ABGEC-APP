@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/drawable/bg_back_view.xml" value="0.185" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/drawable/bg_card.xml" value="0.185" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/drawable/bg_edt_text.xml" value="0.185" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/drawable/bg_google.xml" value="0.175" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/drawable/bg_male.xml" value="0.1945" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/drawable/bg_rect.xml" value="0.121" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/drawable/bg_view.xml" value="0.175" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/drawable/box.xml" value="0.175" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/drawable/ic_acc_profile.xml" value="0.1945" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/drawable/ic_account.xml" value="0.1945" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/drawable/ic_category.xml" value="0.1945" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/drawable/ic_ellipse3.xml" value="0.175" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/drawable/ic_female.xml" value="0.1945" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/drawable/ic_flag.xml" value="0.175" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/drawable/ic_help.xml" value="0.1945" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/drawable/ic_home.xml" value="0.1945" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/drawable/ic_logout.xml" value="0.1945" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/drawable/ic_male.xml" value="0.1945" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/drawable/ic_policy.xml" value="0.1945" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/drawable/ic_rate.xml" value="0.1945" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/drawable/ic_terms.xml" value="0.1945" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/drawable/ic_user.xml" value="0.2035" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/drawable/indicator_default.xml" value="0.175" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/drawable/indicator_selected.xml" value="0.175" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/drawable/indicator_selector.xml" value="0.175" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/drawable/item_background_nav_check.xml" value="0.1945" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/drawable/splash.xml" value="0.185" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/layout/activity_onboarding.xml" value="0.25" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/layout/fragment_alumni_list.xml" value="0.1" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/layout/fragment_details_form.xml" value="0.25" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/layout/fragment_edit_profile.xml" value="0.25" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/layout/fragment_home_page.xml" value="0.25" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/layout/layout_choose.xml" value="0.25" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/layout/layout_screen.xml" value="0.18671875" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/layout/login1.xml" value="0.24895833333333334" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/layout/nav_header_layout.xml" value="0.24895833333333334" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/layout/otp_verify.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/menu/list.xml" value="0.2" />
+        <entry key="..\:/Users/nikhi/AndroidStudioProjects/ABGEC/app/src/main/res/menu/navigation_menu.xml" value="0.25" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

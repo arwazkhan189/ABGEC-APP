@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="main_yellow">#F27F0C</color>
+    <color name="main_blue">#063F5C</color>
+    <color name="main_pale_blue">#ACE9FE</color>
+    <color name="main_skin">#FFF2E9</color>
+
+
+    <color name="splash_Bg">#ebfffe</color>
+    <color name="light_red">#F5DED8</color>
+    <color name="calendar_status">#D6E1FF</color>
+    <color name="light_red_shade">#EFBCBC</color>
+    <color name="crimson_red">#DC143C</color>
+    <color name="barn_red">#7C0A02</color>
+    <color name="grey">#808080</color>
+    <color name="veryLightGrey">#f0f0f0</color>
+    <color name="light_very_grey">#E6E5E5</color>
+    <color name="event_title">#13114F</color>
+    <color name="event_message">#AcAAc3</color>
+    <color name="event_card_bg">#678cb4</color>
+    <color name="event_location">#1d2398</color>
+    <color name="date_font">#ea4a1f</color>
+    <color name="myntra_red">#FF406C</color>
+
+    <color name="light_one">#FFE1E3</color>//noti
+    <color name="light_two">#C1E4FC</color>//web
+    <color name="light_three">#CFFFE9</color>//task
+    <color name="light_four">#F8E89D</color>
+    <color name="light_yellow_bg">#EEF88D</color>
+
+
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorSearchIcon">#DBDBDB</color>
+    <color name="colorTextHint">#7B7B7B</color>
+    <color name="colorQuickActionsBackground">#2F2D2E</color>
+    <color name="colorIcons">#A4A4A4</color>
+    <color name="colorTextSubtitle">#CECECE</color>
+    <color name="colorDefaultNoteColor">#333333</color>
+    <color name="colorNoteSubtitleText">#FAFAFA</color>
+    <color name="light_dark_white_back">#F4F4F4</color>
+    <color name="card_personal_bg">#FA9744</color>
+    <color name="colorMiscellaneousBackground">#1F1F1F</color>
+    <color name="colorNoteColor2">#FDBE3B</color>
+    <color name="colorNoteColor3">#FF4842</color>
+    <color name="colorNoteColor4">#3A52FC</color>
+    <color name="colorNoteColor5">#000000</color>
+    <color name="colorDelete">#FF4842</color>
+    <color name="colorSearchBackground">#333333</color>
+    <color name="colorPlaceholderBackground">#dddddd</color>
+
+
+    <color name="profilePrimaryDark">#FF3B30</color>
+    <color name="bottomNavigationTextColor">#B2B2B2</color>
+    <color name="text_parent_color">#A1887F</color>
+    <color name="profileAccentColor">#F7F7F7</color>
+
+    <color name="red_dif">#BA0C14</color>
+
+    <color name="orange">#e96443</color>
+    <color name="indigo">#904e95</color>
+
+    <color name="ui_red">#FF416C</color>
+    <color name="bulb_red">#ff7a7a</color>
+
+    <color name="Algerian_red">#e32636</color>
+
+    <color name="colorSliderBackground">#FF181821</color>
+    <color name="colorTextColor">#FFFFFFFF</color>
+    <color name="blue">#FF2371FA</color>
+
+    <color name="transparent">#00808080</color>
+
+    <color name="verify_gray_message">#2C2727</color>
+
+    <color name="purpul">#9930c7</color>
+    <color name="colorTextPrimary">#ffffff</color>
+    <color name="green">#008643</color>
+    <color name="clam_shell">#D8B3B3</color>
+    <color name="indicatorColor">#2DFFFFFF</color>
+    <color name="iconTint">#C8FFFFFF</color>
+    <color name="iconTintActive">#ffffff</color>
+
+    <color name="matterhorn">#503D44</color>
+    <color name="wax_flower">#FFC4B2</color>
+    <color name="red_ui">#F75959</color>
+    <color name="purple_ui">#AF35F2</color>
+    <color name="bar_color">#827CF0</color>
+    <color name="bar_color_dark">#433F83</color>
+    <color name="bar_color_light">#E4E2F6</color>
+    <color name="card_task_color">#7C89FA</color>
+    <color name="blue_card">#3358dc</color>
+    <color name="card_task_bg_">#4DA5AEFF</color>
+    <color name="forest_morning">#0E4B40</color>
+    <color name="cyan_design">#D9F5F8</color>
+    <color name="cyan_design_medium">#5FB6C3</color>
+    <color name="cyan_design_dark">#188FA6</color>
+    <color name="yellow_design_dark">#EFA135</color>
+    <color name="grey_design_dark">#A0A7AF</color>
+    <color name="design_dark_yellow">#ff9800</color>
+    <color name="design_medium_yellow">#ffb850</color>
+    <color name="design_light_yellow">#ffdfaf</color>
+    <color name="design_light_blue">#519fcb</color>
+    <color name="club_color">#F2F0E4</color>
+    <color name="design_red_color">#E53935</color>
+    <color name="design_red_light_color">#ff4d5e</color>
+    <color name="target_color">#795548</color>
+    <color name="design_brown_text">#42302a</color>
+    <color name="design_grey_text">#AFB7C5</color>
+    <color name="design_dark_grey_text">#3F4056</color>
+
+
+    <color name="orange_50">#FFF3E0</color>
+    <color name="orange_100">#FFE0B2</color>
+    <color name="orange_200">#FFCC80</color>
+    <color name="orange_300">#FFB74D</color>
+    <color name="orange_400">#FFA726</color>
+    <color name="orange_500">#FF9800</color>
+    <color name="orange_600">#FB8C00</color>
+    <color name="orange_700">#F57C00</color>
+    <color name="orange_800">#EF6C00</color>
+    <color name="orange_900">#E65100</color>
+    <color name="orange_A100">#FFD180</color>
+    <color name="orange_A200">#FFAB40</color>
+    <color name="orange_A400">#FF9100</color>
+    <color name="orange_A700">#FF6D00</color>
+
+    <color name="grey_50">#FAFAFA</color>
+    <color name="grey_100">#F5F5F5</color>
+    <color name="grey_200">#EEEEEE</color>
+    <color name="grey_300">#E0E0E0</color>
+    <color name="grey_400">#BDBDBD</color>
+    <color name="grey_500">#9E9E9E</color>
+    <color name="grey_600">#757575</color>
+    <color name="grey_700">#616161</color>
+    <color name="grey_800">#424242</color>
+    <color name="grey_900">#212121</color>
+    <color name="grey_1000">#1a1a1a</color>
+
+
+
+</resources>

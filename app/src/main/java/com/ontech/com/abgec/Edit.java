@@ -1,0 +1,627 @@
+package com.ontech.com.abgec;
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import android.Manifest;
+import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+import com.github.dhaval2404.imagepicker.ImagePicker;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.DexterError;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
+public class Edit extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+    private ImageView imageView;
+
+    // Uri indicates, where the image will be picked from
+
+    // request code
+    private final int PICK_IMAGE_REQUEST = 22;
+    public ActivityResultLauncher<Intent> resultLauncher;
+    private String shopImageUri;
+    private Uri imageUri;
+    private CircleImageView shopImage;
+    TextView personal_btn, date_txt, social_btn, occupation_btn, upload_pic, male, female, submit;
+    LinearLayout layout_personal, layout_social, layout_occupation;
+    Context contextNullSafe;
+    ImageView back_btn;
+    int x = 0;
+    int y = 0;
+    ConstraintLayout lay;
+    int z = 0;
+    int check_;
+    ArrayAdapter ad;
+    DatePickerDialog.OnDateSetListener mDateSetListener;
+    private static final int CAMERA_REQUEST = 1888;
+    // instance for firebase storage and StorageReference
+    FirebaseStorage storage;
+    StorageReference storageReference;
+    DatabaseReference reference;
+    FirebaseAuth auth;
+    String selectedImagePath = "";
+    FirebaseUser user;
+    String gender = "";
+
+    EditText bio, fb, twitter, linkidin, insta, organiztion, designation, year, name, state, country, city;
+    AutoCompleteTextView branch, passout_yr;
+    TextView gend;
+
+    String[] values = {"Service", "Self-Employed", "Retired", "Other"};
+    Spinner spino;
+
+    String gen, dateOfBirth, bioo, fcb, twt, lin, inst, occup, organ, desig, nam, br, py, countr, stat, cit, dp_uri;
+
+    public static final int REQUEST_CODE_STORAGE_PERMISSION = 1;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_edit);
+
+
+        spino = findViewById(R.id.spinner);
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        valueGetting();
+        upload_pic = findViewById(R.id.profile_pic);
+        gend = findViewById(R.id.gender);
+        shopImage = findViewById(R.id.uploaded_pic);
+        layout_personal = findViewById(R.id.personal_layout);
+        personal_btn = findViewById(R.id.personal_btn);
+        date_txt = findViewById(R.id.date);
+        social_btn = findViewById(R.id.social);
+        layout_social = findViewById(R.id.social_links);
+        layout_occupation = findViewById(R.id.occupation_layout);
+        male = findViewById(R.id.male);
+        female = findViewById(R.id.female);
+        occupation_btn = findViewById(R.id.occupation);
+        back_btn = findViewById(R.id.back);
+        //year = findViewById(R.id.)
+        reference = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
+        //occupation = findViewById(R.id.occupation_edt);
+        lay = findViewById(R.id.lay1);
+        //Editext
+        submit = findViewById(R.id.submit);
+        name = findViewById(R.id.name);
+        state = findViewById(R.id.state);
+        city = findViewById(R.id.city);
+        country = findViewById(R.id.country);
+        //mobile_no = view.findViewById(R.id.mobile_no);
+        branch = findViewById(R.id.country_p);
+        passout_yr = findViewById(R.id.passout_yr);
+        organiztion = findViewById(R.id.company);
+        designation = findViewById(R.id.designation);
+        insta = findViewById(R.id.instagram);
+        linkidin = findViewById(R.id.linkedin);
+        fb = findViewById(R.id.facebook);
+        twitter = findViewById(R.id.twitter);
+        bio = findViewById(R.id.bio);
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+
+
+        submit.setOnClickListener(v -> {
+
+            if (!name.getText().toString().trim().equals("")) {
+                if (!branch.getText().toString().trim().equals("")) {
+                    if (!passout_yr.getText().toString().trim().equals("")) {
+                        if (!country.getText().toString().trim().equals("")) {
+                            if (!state.getText().toString().trim().equals("")) {
+                                if (!city.getText().toString().trim().equals("")) {
+                                    if (!gender.equals("")) {
+                                        if (!date_txt.getText().toString().trim().equals("")) {
+                                            dataSend();
+                                        } else {
+                                            date_txt.setError("Empty");
+                                            layout_personal.setVisibility(View.VISIBLE);
+                                            Snackbar.make(lay, "Please Add Your Date of Birth", Snackbar.LENGTH_LONG)
+                                                    .setActionTextColor(Color.parseColor("#171746"))
+                                                    .setTextColor(Color.parseColor("#FF7F5C"))
+                                                    .setBackgroundTint(Color.parseColor("#171746"))
+                                                    .show();
+                                        }
+                                    } else {
+                                        gend.setError("Empty");
+                                        layout_personal.setVisibility(View.VISIBLE);
+                                        Snackbar.make(lay, "Please Select Your Gender", Snackbar.LENGTH_LONG)
+                                                .setActionTextColor(Color.parseColor("#171746"))
+                                                .setTextColor(Color.parseColor("#FF7F5C"))
+                                                .setBackgroundTint(Color.parseColor("#171746"))
+                                                .show();
+                                    }
+                                } else {
+                                    city.setError("Empty");
+                                    Snackbar.make(lay, "Please Add City", Snackbar.LENGTH_LONG)
+                                            .setActionTextColor(Color.parseColor("#171746"))
+                                            .setTextColor(Color.parseColor("#FF7F5C"))
+                                            .setBackgroundTint(Color.parseColor("#171746"))
+                                            .show();
+                                }
+                            } else {
+                                state.setError("Empty");
+                                Snackbar.make(lay, "Please Add State", Snackbar.LENGTH_LONG)
+                                        .setActionTextColor(Color.parseColor("#171746"))
+                                        .setTextColor(Color.parseColor("#FF7F5C"))
+                                        .setBackgroundTint(Color.parseColor("#171746"))
+                                        .show();
+                            }
+                        } else {
+                            country.setError("Empty");
+                            Snackbar.make(lay, "Please Add Country", Snackbar.LENGTH_LONG)
+                                    .setActionTextColor(Color.parseColor("#171746"))
+                                    .setTextColor(Color.parseColor("#FF7F5C"))
+                                    .setBackgroundTint(Color.parseColor("#171746"))
+                                    .show();
+                        }
+                    } else {
+                        passout_yr.setError("Empty");
+                        Snackbar.make(lay, "Please Add Passout Year", Snackbar.LENGTH_LONG)
+                                .setActionTextColor(Color.parseColor("#171746"))
+                                .setTextColor(Color.parseColor("#FF7F5C"))
+                                .setBackgroundTint(Color.parseColor("#171746"))
+                                .show();
+                    }
+                } else {
+                    branch.setError("Empty");
+                    Snackbar.make(lay, "Please Add Branch.", Snackbar.LENGTH_LONG)
+                            .setActionTextColor(Color.parseColor("#171746"))
+                            .setTextColor(Color.parseColor("#FF7F5C"))
+                            .setBackgroundTint(Color.parseColor("#171746"))
+                            .show();
+                }
+            } else {
+                name.setError("Empty");
+                Snackbar.make(lay, "Please Add Name.", Snackbar.LENGTH_LONG)
+                        .setActionTextColor(Color.parseColor("#171746"))
+                        .setTextColor(Color.parseColor("#FF7F5C"))
+                        .setBackgroundTint(Color.parseColor("#171746"))
+                        .show();
+            }
+        });
+
+
+        occupation_btn.setOnClickListener(v -> {
+            if (z == 0) {
+                z = 1;
+                layout_occupation.setVisibility(View.VISIBLE);
+                Animation animSlideDown = AnimationUtils.loadAnimation(Edit.this, R.anim.slide_down);
+                layout_occupation.startAnimation(animSlideDown);
+            } else {
+                z = 0;
+                Animation animSlideUp = AnimationUtils.loadAnimation(Edit.this, R.anim.slide_up);
+                layout_occupation.startAnimation(animSlideUp);
+                layout_occupation.setVisibility(View.GONE);
+            }
+        });
+
+        social_btn.setOnClickListener(v -> {
+            if (y == 0) {
+                y = 1;
+                layout_social.setVisibility(View.VISIBLE);
+                Animation animSlideDown = AnimationUtils.loadAnimation(Edit.this, R.anim.slide_down);
+                layout_social.startAnimation(animSlideDown);
+            } else {
+                y = 0;
+                Animation animSlideUp = AnimationUtils.loadAnimation(Edit.this, R.anim.slide_up);
+                layout_social.startAnimation(animSlideUp);
+                layout_social.setVisibility(View.GONE);
+            }
+        });
+
+        date_txt.setOnClickListener(v -> {
+            Calendar cal = Calendar.getInstance();
+            int year = cal.get(Calendar.YEAR);
+            int month = cal.get(Calendar.MONTH);
+            int day = cal.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog dialog = new DatePickerDialog(
+                    Edit.this,
+                    mDateSetListener,
+                    year, month, day);
+            check_ = 0;
+            dialog.show();
+        });
+        //spinner
+        spino.setOnItemSelectedListener(this);
+        ad = new ArrayAdapter(
+                this,
+                android.R.layout.simple_spinner_item,
+                values);
+        ad.setDropDownViewResource(
+                android.R.layout
+                        .simple_spinner_dropdown_item);
+        spino.setAdapter(ad);
+
+
+        personal_btn.setOnClickListener(v -> {
+            if (x == 0) {
+                x = 1;
+                layout_personal.setVisibility(View.VISIBLE);
+                Animation animSlideDown = AnimationUtils.loadAnimation(Edit.this, R.anim.slide_down);
+                layout_personal.startAnimation(animSlideDown);
+            } else {
+                x = 0;
+                Animation animSlideUp = AnimationUtils.loadAnimation(Edit.this, R.anim.slide_up);
+                layout_personal.startAnimation(animSlideUp);
+                layout_personal.setVisibility(View.GONE);
+            }
+        });
+
+        mDateSetListener = (datePicker, year, month, day) -> {
+
+            String d = String.valueOf(day);
+            String m = String.valueOf(month + 1);
+            Log.e("month", m + "");
+            month = month + 1;
+            Log.e("month", month + "");
+            if (String.valueOf(day).length() == 1)
+                d = "0" + day;
+            if (String.valueOf(month).length() == 1)
+                m = "0" + month;
+            String date = d + "." + m + "." + year;
+            if (check_ == 0) {
+                date_txt.setText(date);
+                //date = year + m + d;
+                // fd_dot=year+"-"+m+"-"+d;
+            }
+        };
+
+        back_btn.setOnClickListener(v -> {
+            finish();
+        });
+
+
+        resultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    if (result.getData() != null) {
+                        imageUri = result.getData().getData();
+                        shopImage.setVisibility(View.VISIBLE);
+                        shopImageUri = imageUri.toString();
+                        shopImage.setImageURI(imageUri);
+                    }
+                }
+            }
+        });
+
+
+        upload_pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialog dialog = new Dialog(Edit.this);
+                dialog.setContentView(R.layout.dialog_picture_capture);
+                TextView camera = dialog.findViewById(R.id.camera);
+                TextView storage = dialog.findViewById(R.id.storage);
+                storage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent();
+                        intent.setType("image/*");
+                        intent.setAction(Intent.ACTION_GET_CONTENT);
+                        resultLauncher.launch(intent);
+                        dialog.dismiss();
+                    }
+                });
+
+                camera.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dexterCalling(Edit.this);
+                        dialog.dismiss();
+
+                       /* Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        if (ContextCompat.checkSelfPermission(Edit.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                            ImagePicker.with(Edit.this)
+                                    .cameraOnly()
+                                    .saveDir(getExternalFilesDir(Environment.DIRECTORY_DCIM))
+                                    .start(CAMERA_REQUEST);
+
+                        } else {
+                            ActivityCompat.requestPermissions(
+                                    Edit.this,
+                                    new String[]{Manifest.permission.CAMERA},
+                                    PERMISSION_REQUEST_CODE
+                            );
+                        }
+                        dialog.dismiss();*/
+                    }
+                });
+
+                Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+    }
+
+
+    void dexterCalling(Activity activity)//for granting RunTime permission
+    {
+        //    Log.d("chekingTemp", "dexterCalling: "+temp);
+        Dexter.withActivity(this)
+
+                .withPermissions(Manifest.permission.CAMERA,
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.READ_CONTACTS,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)
+
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+
+                        ImagePicker.with(Edit.this)
+                                .cameraOnly()
+                                .crop()                    //Crop image(Optional), Check Customization for more option
+                                .compress(1024)            //Final image size will be less than 1 MB(Optional)
+                                .maxResultSize(1080, 1080)    //Final image resolution will be less than 1080 x 1080(Optional)
+                                .saveDir(getExternalFilesDir(Environment.DIRECTORY_DCIM))
+                                .start(CAMERA_REQUEST);
+                    }
+
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+                        permissionToken.continuePermissionRequest();
+                    }
+                }).withErrorListener(new PermissionRequestErrorListener() {
+
+                    @Override
+                    public void onError(DexterError error) {
+
+                        Toast.makeText(getApplicationContext(), "Error occurred! ", Toast.LENGTH_SHORT).show();
+                    }
+                })
+
+                .onSameThread().check();
+    }
+
+    private void valueGetting() {
+
+        reference = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    gen = snapshot.child("gender").getValue(String.class);
+                    dateOfBirth = snapshot.child("dob").getValue(String.class);
+                    bioo = snapshot.child("bio").getValue(String.class);
+                    fcb = snapshot.child("fb").getValue(String.class);
+                    inst = snapshot.child("insta").getValue(String.class);
+                    lin = snapshot.child("linedin").getValue(String.class);
+                    twt = snapshot.child("twitter").getValue(String.class);
+                    occup = snapshot.child("occupation").getValue(String.class);
+                    organ = snapshot.child("organization").getValue(String.class);
+                    desig = snapshot.child("designation").getValue(String.class);
+                    nam = snapshot.child("name").getValue(String.class);
+                    br = snapshot.child("branch").getValue(String.class);
+                    py = snapshot.child("passout").getValue(String.class);
+                    countr = snapshot.child("country").getValue(String.class);
+                    stat = snapshot.child("state").getValue(String.class);
+                    cit = snapshot.child("city").getValue(String.class);
+                    dp_uri = snapshot.child("dp_link").getValue(String.class);
+
+                    male.setOnClickListener(v -> {
+                        male.setBackgroundResource(R.drawable.bg_selector);
+                        female.setBackgroundResource(R.drawable.bg_male);
+                        gender = "Male";
+                    });
+
+                    if (!dp_uri.equals("")) {
+                        shopImage.setVisibility(View.VISIBLE);
+                    }
+
+                    female.setOnClickListener(v -> {
+                        female.setBackgroundResource(R.drawable.bg_selector);
+                        male.setBackgroundResource(R.drawable.bg_male);
+                        gender = "Female";
+                    });
+
+                    //setting values
+                    if (gen.equals("Male")) {
+                        male.setBackgroundResource(R.drawable.bg_selector);
+                        female.setBackgroundResource(R.drawable.bg_male);
+                        gender = "Male";
+                    } else {
+                        female.setBackgroundResource(R.drawable.bg_selector);
+                        male.setBackgroundResource(R.drawable.bg_male);
+                        gender = "Male";
+                    }
+
+                    date_txt.setText(dateOfBirth);
+                    bio.setText(bioo);
+                    fb.setText(fcb);
+                    twitter.setText(twt);
+                    linkidin.setText(lin);
+                    insta.setText(inst);
+                    organiztion.setText(organ);
+                    designation.setText(desig);
+                    name.setText(nam);
+                    branch.setText(br);
+                    passout_yr.setText(py);
+                    country.setText(countr);
+                    state.setText(stat);
+                    city.setText(cit);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
+
+   /* void removeImage(){
+        imageNote.setImageBitmap(null);
+        imageNote.setVisibility(View.GONE);
+        view.findViewById(R.id.imageRemoveImage).setVisibility(View.GONE);
+        selectedImagePath = "";
+    }*/
+
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
+    private void dataSend() {
+        uploadImage();
+        reference.child("gender").setValue(gender);
+        reference.child("dob").setValue(date_txt.getText().toString());
+        reference.child("bio").setValue(bio.getText().toString());
+        reference.child("fb").setValue(fb.getText().toString());
+        reference.child("insta").setValue(insta.getText().toString());
+        reference.child("twitter").setValue(twitter.getText().toString());
+        reference.child("linkedin").setValue(linkidin.getText().toString());
+        reference.child("occupation").setValue(ad.toString());
+        reference.child("organization").setValue(organiztion.getText().toString());
+        reference.child("designation").setValue(designation.getText().toString());
+
+        //reference.child("year").setValue(year.getText().toString());
+        reference.child("name").setValue(name.getText().toString());
+        reference.child("branch").setValue(branch.getText().toString());
+        reference.child("passout").setValue(passout_yr.getText().toString());
+        reference.child("country").setValue(country.getText().toString());
+        reference.child("state").setValue(state.getText().toString());
+        reference.child("city").setValue(city.getText().toString());
+
+    }
+
+    private void uploadImage()
+    {
+        if (imageUri != null) {
+
+            // Code for showing progressDialog while uploading
+            ProgressDialog progressDialog
+                    = new ProgressDialog(this);
+            progressDialog.setTitle("Uploading...");
+            progressDialog.show();
+
+            // Defining the child of storageReference
+            StorageReference ref
+                    = storageReference
+                    .child(
+                            "images/"
+                                    + UUID.randomUUID().toString());
+
+            // adding listeners on upload
+            // or failure of image
+            ref.putFile(imageUri)
+                    .addOnSuccessListener(
+                            new OnSuccessListener<UploadTask.TaskSnapshot>() {
+
+                                @Override
+                                public void onSuccess(
+                                        UploadTask.TaskSnapshot taskSnapshot)
+                                {
+
+                                    // Image uploaded successfully
+                                    // Dismiss dialog
+                                    progressDialog.dismiss();
+                                    Toast
+                                            .makeText(Edit.this,
+                                                    "Image Uploaded!!",
+                                                    Toast.LENGTH_SHORT)
+                                            .show();
+                                }
+                            })
+
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e)
+                        {
+
+                            // Error, Image not uploaded
+                            progressDialog.dismiss();
+                            Toast
+                                    .makeText(Edit.this,
+                                            "Failed " + e.getMessage(),
+                                            Toast.LENGTH_SHORT)
+                                    .show();
+                        }
+                    })
+                    .addOnProgressListener(
+                            new OnProgressListener<UploadTask.TaskSnapshot>() {
+
+                                // Progress Listener for loading
+                                // percentage on the dialog box
+                                @Override
+                                public void onProgress(
+                                        UploadTask.TaskSnapshot taskSnapshot)
+                                {
+                                    double progress
+                                            = (100.0
+                                            * taskSnapshot.getBytesTransferred()
+                                            / taskSnapshot.getTotalByteCount());
+                                    progressDialog.setMessage(
+                                            "Uploaded "
+                                                    + (int)progress + "%");
+                                }
+                            });
+        }
+    }
+
+}
+
+
+
+

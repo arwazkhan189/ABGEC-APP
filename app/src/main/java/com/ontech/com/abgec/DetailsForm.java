@@ -1,8 +1,11 @@
 package com.ontech.com.abgec;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -27,7 +30,7 @@ public class DetailsForm extends Fragment {
 
 
     View view;
-    TextView submit,name,state,country,city,mobile_no,email_edt;
+    TextView submit,name,state,country,city;
     AutoCompleteTextView branch,passout_yr;
     ConstraintLayout lay;
     DatabaseReference reference;
@@ -55,7 +58,6 @@ public class DetailsForm extends Fragment {
         state = view.findViewById(R.id.state);
         city = view.findViewById(R.id.city);
         country = view.findViewById(R.id.country);
-        email_edt = view.findViewById(R.id.email_edt);
         //mobile_no = view.findViewById(R.id.mobile_no);
         branch = view.findViewById(R.id.branch);
         passout_yr = view.findViewById(R.id.passout_yr);
@@ -78,6 +80,7 @@ public class DetailsForm extends Fragment {
 
         lay = view.findViewById(R.id.lay);
         reference = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
+
         submit.setOnClickListener(v-> {
             if(!name.getText().toString().trim().equals("")){
                 if(!branch.getText().toString().trim().equals("")){
@@ -85,17 +88,8 @@ public class DetailsForm extends Fragment {
                         if(!country.getText().toString().trim().equals("")){
                             if(!state.getText().toString().trim().equals("")){
                                 if(!city.getText().toString().trim().equals("")) {
-                                    if (!email_edt.getText().toString().trim().equals("")) {
                                         datasend();
-                                    } else {
-                                        email_edt.setError("Empty");
-                                        Snackbar.make(lay, "Please Add your email", Snackbar.LENGTH_LONG)
-                                                .setActionTextColor(Color.parseColor("#171746"))
-                                                .setTextColor(Color.parseColor("#FF7F5C"))
-                                                .setBackgroundTint(Color.parseColor("#171746"))
-                                                .show();
                                     }
-                                }
                                 else{
                                     city.setError("Empty");
                                     Snackbar.make(lay,"Please Add City",Snackbar.LENGTH_LONG)
@@ -162,11 +156,27 @@ public class DetailsForm extends Fragment {
         reference.child("state").setValue(state.getText().toString());
         reference.child("city").setValue(city.getText().toString());
         reference.child("id").setValue("Alumni");
-        reference.child("email").setValue(email_edt.getText().toString());
         reference.child("phone").setValue(phone);
         reference.child("token").setValue(token);
         reference.child("uid").setValue(uid);
+        reference.child("id").setValue("admin");
+        reference.child("dp_link").setValue("");
 
+        reference.child("gender").setValue("");
+        reference.child("dob").setValue("");
+        reference.child("bio").setValue("");
+        reference.child("fb").setValue("");
+        reference.child("insta").setValue("");
+        reference.child("twitter").setValue("");
+        reference.child("linkedin").setValue("");
+        reference.child("occupation").setValue("");
+        reference.child("organization").setValue("");
+        reference.child("designation").setValue("");
+
+        SharedPreferences pref = getContextNullSafety().getSharedPreferences("details?", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putBoolean("isDetailsFilled", true);
+        editor.apply();
 
         Intent myIntent = new Intent(getActivity(), MainActivity.class);
         ActivityOptions options =

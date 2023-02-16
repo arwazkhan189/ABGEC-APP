@@ -4,6 +4,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -11,13 +12,16 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -25,6 +29,8 @@ import java.util.Objects;
 
 import me.ibrahimsn.lib.OnItemSelectedListener;
 import me.ibrahimsn.lib.SmoothBottomBar;
+import www.sanju.motiontoast.MotionToast;
+import www.sanju.motiontoast.MotionToastStyle;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navView;
     OnBackPressedListener onBackpressedListener;
     DrawerLayout drawer;
+    ImageView globe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
        //SharedPreferences sh = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
 
+        globe = findViewById(R.id.globe);
 
         setSupportActionBar(toolbar);
 
@@ -60,6 +68,12 @@ public class MainActivity extends AppCompatActivity {
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.main_blue));
         toggle.syncState();
 
+        globe.setOnClickListener(v->{
+            String url = "https://abgec.in/";
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
+        });
 
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             Fragment fragment = null;
@@ -102,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
 
         bottomBar = findViewById(R.id.bottomBar);
         bottomBar.setItemActiveIndex(0);
+
         bottomBar.setOnItemSelectedListener((OnItemSelectedListener) i -> {
             if (i == 0) {
                 bottomBar.setItemActiveIndex(0);
@@ -129,16 +144,26 @@ public class MainActivity extends AppCompatActivity {
                         .replace(R.id.container, new AlumniList(), "list_announcement")
                         .commit();
             } else if (i == 2) {
-                bottomBar.setItemActiveIndex(2);
-                if (MainActivity.this.getSupportFragmentManager().findFragmentById(R.id.container) != null) {
+                if (check_for_student()) {
+                    MotionToast.Companion.darkColorToast(MainActivity.this,
+                            "Access Denied ☹️",
+                            "You do not have authority to access your profile",
+                            MotionToastStyle.ERROR,
+                            MotionToast.GRAVITY_BOTTOM,
+                            MotionToast.LONG_DURATION,
+                            ResourcesCompat.getFont(MainActivity.this, R.font.lexend));
+                } else {
+                    bottomBar.setItemActiveIndex(2);
+                    if (MainActivity.this.getSupportFragmentManager().findFragmentById(R.id.container) != null) {
+                        MainActivity.this.getSupportFragmentManager()
+                                .beginTransaction().
+                                remove(Objects.requireNonNull(MainActivity.this.getSupportFragmentManager().findFragmentById(R.id.container))).commit();
+                    }
                     MainActivity.this.getSupportFragmentManager()
-                            .beginTransaction().
-                            remove(Objects.requireNonNull(MainActivity.this.getSupportFragmentManager().findFragmentById(R.id.container))).commit();
+                            .beginTransaction()
+                            .replace(R.id.container, new Profile(), "list_announcement")
+                            .commit();
                 }
-                MainActivity.this.getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.change_layout, new EditProfile(), "list_announcement")
-                        .commit();
             }
             return false;
         });
@@ -166,18 +191,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //on backpress
-    @Override
-    public void onBackPressed() {
-        if (onBackpressedListener != null) {
-            getSupportActionBar().setTitle("Home");
-            navView.setCheckedItem(R.id.nav_home);
-            onBackpressedListener.doBack();
-            drawer.closeDrawer(GravityCompat.START);
-        } else if (onBackpressedListener == null) {
-            finish();
-            super.onBackPressed();
-        }
-    }
+//    @Override
+//    public void onBackPressed() {
+//        if (onBackpressedListener != null) {
+//            getSupportActionBar().setTitle("Home");
+//            navView.setCheckedItem(R.id.nav_home);
+//            onBackpressedListener.doBack();
+//            drawer.closeDrawer(GravityCompat.START);
+//        } else if (onBackpressedListener == null) {
+//            finish();
+//            super.onBackPressed();
+//        }
+//    }
 
     public interface OnBackPressedListener {
         void doBack();
@@ -191,6 +216,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         onBackpressedListener = null;
         super.onDestroy();
+    }
+
+    private boolean check_for_student(){
+        SharedPreferences pref = getSharedPreferences("our_user?", MODE_PRIVATE);
+        return pref.getBoolean("student", true);
     }
 
 }

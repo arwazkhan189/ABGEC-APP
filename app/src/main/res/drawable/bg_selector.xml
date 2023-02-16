@@ -3,6 +3,9 @@
     <gradient
         android:endColor="@color/orange_50"
         android:startColor="@color/orange_50" />
+    <stroke
+        android:color="@color/main_blue"
+        android:width="2dp"/>
     <corners
         android:radius="10dp"/>
 </shape>

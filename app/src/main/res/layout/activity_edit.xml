@@ -6,10 +6,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:clickable="true"
-    android:paddingTop="20dp"
     android:focusable="true"
     android:scrollbars="none"
-    android:id="@+id/lay"
+    android:id="@+id/lay1"
     >
 
     <ScrollView
@@ -33,7 +32,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="30dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:id="@+id/back"
@@ -59,6 +59,15 @@
                     android:textSize="25sp" />
 
             </LinearLayout>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/uploaded_pic"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/ic_acc_profile"
+                tools:ignore="ImageContrastCheck" />
 
             <TextView
                 android:id="@+id/profile_pic"
@@ -102,89 +111,89 @@
                 android:layout_height="wrap_content">
 
 
-            <TextView
-                android:id="@+id/gender"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_medium"
-                android:text="@string/gender"
-                android:layout_marginTop="15dp"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:layout_margin="20dp"
-                android:orientation="horizontal">
-
                 <TextView
-                    android:id="@+id/male"
+                    android:id="@+id/gender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_male"
-                    android:drawablePadding="10dp"
-                    android:fontFamily="@font/lexend"
-                    android:gravity="center"
-                    android:padding="15dp"
-                    android:text="@string/male"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/gender"
+                    android:layout_marginTop="15dp"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
-                    app:drawableStartCompat="@drawable/ic_male"
-                    app:layout_constraintEnd_toEndOf="@+id/editTextTextMultiLine"
-                    app:layout_constraintStart_toStartOf="@+id/editTextTextMultiLine"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout14"
-                    tools:ignore="NestedWeights,SpeakableTextPresentCheck,TextContrastCheck" />
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/male"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_male"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/lexend"
+                        android:gravity="center"
+                        android:padding="15dp"
+                        android:text="@string/male"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:drawableStartCompat="@drawable/ic_male"
+                        app:layout_constraintEnd_toEndOf="@+id/editTextTextMultiLine"
+                        app:layout_constraintStart_toStartOf="@+id/editTextTextMultiLine"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout14"
+                        tools:ignore="NestedWeights,SpeakableTextPresentCheck,TextContrastCheck" />
+
+                    <TextView
+                        android:id="@+id/female"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="10dp"
+                        android:background="@drawable/bg_male"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/lexend"
+                        android:gravity="center"
+                        android:padding="15dp"
+                        android:text="@string/female"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:drawableStartCompat="@drawable/ic_female"
+                        app:layout_constraintEnd_toEndOf="@+id/editTextTextMultiLine"
+                        app:layout_constraintStart_toStartOf="@+id/editTextTextMultiLine"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout14"
+                        tools:ignore="SpeakableTextPresentCheck,TextContrastCheck" />
+
+
+                </LinearLayout>
+
 
                 <TextView
-                    android:id="@+id/female"
+                    android:id="@+id/dob"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="10dp"
-                    android:background="@drawable/bg_male"
-                    android:drawablePadding="10dp"
-                    android:fontFamily="@font/lexend"
-                    android:gravity="center"
-                    android:padding="15dp"
-                    android:text="@string/female"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/date_of_birth"
                     android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:importantForAutofill="no"
+                    android:background="@drawable/bg_edt_text"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:hint="@string/tap_to_select"
+                    android:padding="15dp"
                     android:textSize="16sp"
-                    app:drawableStartCompat="@drawable/ic_female"
-                    app:layout_constraintEnd_toEndOf="@+id/editTextTextMultiLine"
-                    app:layout_constraintStart_toStartOf="@+id/editTextTextMultiLine"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout14"
-                    tools:ignore="SpeakableTextPresentCheck,TextContrastCheck" />
-
-
-            </LinearLayout>
-
-
-            <TextView
-                android:id="@+id/dob"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_medium"
-                android:text="@string/date_of_birth"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:importantForAutofill="no"
-                android:background="@drawable/bg_edt_text"
-                android:ems="10"
-                android:gravity="start|top"
-                android:hint="@string/tap_to_select"
-                android:padding="15dp"
-                android:textSize="16sp"
-                tools:ignore="SpeakableTextPresentCheck" />
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <TextView
                     android:id="@+id/about_me"
@@ -365,114 +374,125 @@
                 app:drawableEndCompat="@drawable/ic_arrow_down"
                 app:drawableTint="@color/white" />
 
-        <LinearLayout
-            android:id="@+id/occupation_layout"
-            android:orientation="vertical"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/occ"
+            <LinearLayout
+                android:id="@+id/occupation_layout"
+                android:orientation="vertical"
+                android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_medium"
-                android:text="@string/occupation"
-                android:layout_marginTop="20dp"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/occupation_edt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:importantForAutofill="no"
-                android:background="@drawable/bg_edt_text"
-                android:ems="10"
-                android:gravity="start|top"
-                android:hint="@string/tap_to_select"
-                android:padding="15dp"
-                android:textSize="16sp"
-                tools:ignore="SpeakableTextPresentCheck" />
 
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/lexend"
-                android:text="@string/organization"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/occ"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/occupation"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/company"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/bg_edt_text"
-                android:ems="10"
-                android:fontFamily="@font/lexend"
-                android:gravity="start|top"
-                android:hint="@string/infosys_wipro"
-                android:inputType="textNoSuggestions"
-                android:padding="15dp"
-                android:textSize="16sp"
-                tools:ignore="SpeakableTextPresentCheck"
-                android:autofillHints="" />
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_height="50dp"
+                    android:paddingStart="15dp"
+                    android:background="@drawable/bg_edt_text"
+                    android:prompt="@string/tap_to_select"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="RtlSymmetry" />
 
-            <TextView
-                android:id="@+id/textvies"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_medium"
-                android:text="@string/designation"
-                android:layout_marginTop="20dp"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+               <!-- <TextView
+                    android:id="@+id/occupation_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
 
-            <EditText
-                android:id="@+id/designation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:importantForAutofill="no"
-                android:background="@drawable/bg_edt_text"
-                android:ems="10"
-                android:gravity="start|top"
-                android:hint="@string/manager"
-                android:inputType="textNoSuggestions"
-                android:padding="15dp"
-                android:textSize="16sp"
-                tools:ignore="SpeakableTextPresentCheck"/>
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:hint="@string/tap_to_select"
+                    android:padding="15dp"
+                    android:textSize="16sp"
+                    tools:ignore="SpeakableTextPresentCheck" />-->
 
-            <TextView
-                android:id="@+id/yr"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15sp"
-                android:fontFamily="@font/lexend"
-                android:text="@string/year"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/lexend"
+                    android:text="@string/organization"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
-            <AutoCompleteTextView
-                android:id="@+id/yr_from"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:importantForAutofill="no"
-                android:background="@drawable/bg_edt_text"
-                android:ems="10"
-                android:gravity="start|top"
-                android:fontFamily="@font/lexend"
-                android:hint="@string/_2015_present"
-                android:inputType="textNoSuggestions"
-                android:padding="15dp"
-                android:textSize="16sp"
-                tools:ignore="SpeakableTextPresentCheck" />
-        </LinearLayout>
+                <EditText
+                    android:id="@+id/company"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_edt_text"
+                    android:ems="10"
+                    android:fontFamily="@font/lexend"
+                    android:gravity="start|top"
+                    android:hint="@string/infosys_wipro"
+                    android:inputType="textNoSuggestions"
+                    android:padding="15dp"
+                    android:textSize="16sp"
+                    tools:ignore="SpeakableTextPresentCheck"
+                    android:autofillHints="" />
+
+                <TextView
+                    android:id="@+id/textvies"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/designation"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/designation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:importantForAutofill="no"
+                    android:background="@drawable/bg_edt_text"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:hint="@string/manager"
+                    android:inputType="textNoSuggestions"
+                    android:padding="15dp"
+                    android:textSize="16sp"
+                    tools:ignore="SpeakableTextPresentCheck"/>
+
+          <!--      <TextView
+                    android:id="@+id/yr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15sp"
+                    android:fontFamily="@font/lexend"
+                    android:text="@string/year"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/yr_from"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:importantForAutofill="no"
+                    android:background="@drawable/bg_edt_text"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:fontFamily="@font/lexend"
+                    android:hint="@string/_2015_present"
+                    android:inputType="textNoSuggestions"
+                    android:padding="15dp"
+                    android:textSize="16sp"
+                    tools:ignore="SpeakableTextPresentCheck" />-->
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linearLayout1"
@@ -527,8 +547,6 @@
                     tools:ignore="SpeakableTextPresentCheck"
                     android:autofillHints="">
 
-
-
                 </EditText>
 
                 <TextView
@@ -542,7 +560,7 @@
                     android:textSize="16sp" />
 
                 <AutoCompleteTextView
-                    android:id="@+id/branch"
+                    android:id="@+id/country_p"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -590,7 +608,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15sp"
                     android:fontFamily="@font/lexend"
-                    android:text="Country"
+                    android:text="@string/country"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -671,25 +689,24 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/submit_txt"
+                android:id="@+id/submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="center"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginEnd="20dp"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/bg_card"
                 android:backgroundTint="@color/main_yellow"
                 android:fontFamily="@font/lexend"
+                android:gravity="center"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
-                android:layout_marginBottom="30dp"
                 android:text="@string/save"
-                android:layout_marginTop="30dp"
                 android:textColor="@color/white"
                 android:textSize="18sp"
-                tools:ignore="TextContrastCheck"
-                />
+                tools:ignore="TextContrastCheck" />
 
         </LinearLayout>
     </ScrollView>

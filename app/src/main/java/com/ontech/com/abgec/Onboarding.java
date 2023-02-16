@@ -101,12 +101,12 @@ public class Onboarding extends AppCompatActivity {
         // skip button click listener
         tvSkip.setOnClickListener(v -> {
             screenPager.setCurrentItem(mList.size());
-            //savePrefsData();
+            savePrefsData();
             //hkk
         });
         btnGetStarted.setOnClickListener(v -> {
             screenPager.setCurrentItem(mList.size());
-            //savePrefsData();
+            savePrefsData();
             Intent intent = new Intent(Onboarding.this, Login.class);
             startActivity(intent);
             finish();

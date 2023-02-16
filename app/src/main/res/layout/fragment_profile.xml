@@ -1,159 +1,579 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:focusable="true"
     android:clickable="true"
+    android:layout_marginBottom="70dp"
+    android:id="@+id/swipe_layout"
     tools:context=".Profile">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
+        android:scrollbars="none"
         android:layout_width="match_parent"
-        android:id="@+id/profile_lay"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/imageView3"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginEnd="-5dp"
-            android:layout_gravity="center"
-            android:scaleType="fitXY"
-            android:src="@drawable/profile_bg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="10dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/logo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="25dp"
-            android:elevation="10dp"
-            app:cardCornerRadius="15dp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView3">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp">
 
             <ImageView
+                android:id="@+id/imageView3"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="15dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="-5dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_acc_profile"
-                app:tint="@color/grey" />
+                android:src="@drawable/profile_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.cardview.widget.CardView>
-
-
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:fontFamily="@font/lexend"
-            android:gravity="start"
-            android:text="NIKHIL VERMA"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cardView"
-            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="20dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="25dp"
+                android:elevation="10dp"
+                app:cardCornerRadius="50dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView3">
 
 
-        <LinearLayout
-            android:id="@+id/linearLayout8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/uploaded_pic"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_acc_profile"
+                    app:civ_border_color="@color/main_blue"
+                    app:civ_border_width="1dp"
+                    tools:ignore="ImageContrastCheck" />
+
+            </androidx.cardview.widget.CardView>
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/whatsapp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="-5dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ic_whatsapp"
+                app:layout_constraintStart_toEndOf="@+id/cardView"
+                app:layout_constraintTop_toBottomOf="@+id/name" />
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/twitter"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:src="@drawable/ic_twitter"
+                app:layout_constraintStart_toEndOf="@+id/linkedin"
+                app:layout_constraintTop_toTopOf="@+id/linkedin" />
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/linkedin"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:src="@drawable/ic_linkedin"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
+                app:layout_constraintStart_toEndOf="@+id/instagram"
+                app:layout_constraintTop_toTopOf="@+id/instagram" />
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/instagram"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:paddingTop="5dp"
+                android:layout_marginStart="10dp"
+                android:paddingBottom="5dp"
+                android:src="@drawable/ic_insta"
+                app:layout_constraintBottom_toBottomOf="@+id/whatsapp"
+                app:layout_constraintStart_toEndOf="@+id/whatsapp"
+                app:layout_constraintTop_toTopOf="@+id/whatsapp"
+                tools:ignore="ImageContrastCheck" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/facebook"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:paddingTop="5dp"
+                android:layout_marginStart="10dp"
+                android:paddingBottom="5dp"
+                android:src="@drawable/ic_facebook"
+                app:layout_constraintBottom_toBottomOf="@+id/twitter"
+                app:layout_constraintStart_toEndOf="@+id/twitter"
+                app:layout_constraintTop_toTopOf="@+id/twitter"
+                tools:ignore="ImageContrastCheck" />
+
+
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/lexend"
+                android:gravity="start"
+                android:text="NIKHIL VERMA"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cardView"
+                app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
 
             <LinearLayout
-                android:id="@+id/layout"
+                android:id="@+id/linearLayout8"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="15dp"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:background="@drawable/bg_edt_text"
-                android:padding="13dp">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/whatsapp">
 
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_jobs"
-                    app:tint="@color/main_blue" />
-
-                <TextView
+                <LinearLayout
+                    android:id="@+id/layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:fontFamily="@font/lexend"
-                    android:gravity="start"
-                    android:text="Posted Jobs"
-                    android:textColor="@color/main_blue"
-                    android:textSize="15sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/cardView"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+                    android:layout_margin="13dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_border"
+                    android:padding="13dp">
 
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_jobs"
+                        app:tint="@color/main_blue" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/lexend"
+                        android:gravity="start"
+                        android:text="@string/posted_jobs"
+                        android:textColor="@color/main_blue"
+                        android:textSize="13sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/cardView"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/editProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_margin="13dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_border"
+                    android:padding="13dp">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_edt_profile"
+                        app:tint="@color/main_blue" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/lexend"
+                        android:gravity="start"
+                        android:text="@string/edit_profile"
+                        android:textColor="@color/main_blue"
+                        android:textSize="13sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/cardView"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+                </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="15dp"
-                android:layout_weight="1"
+                android:fontFamily="@font/lexend"
+                android:gravity="start"
+                android:padding="8dp"
+                android:text="@string/brancho"
+                android:textColor="@color/main_blue"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout8" />
+
+            <TextView
+                android:id="@+id/country_p"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
                 android:background="@drawable/bg_edt_text"
-                android:padding="13dp">
+                android:fontFamily="@font/lexend"
+                android:gravity="start"
+                android:padding="8dp"
+                android:textColor="@color/grey_800"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView2"
+                app:layout_constraintEnd_toEndOf="@+id/branch_p"
+                app:layout_constraintStart_toEndOf="@+id/textView2"
+                app:layout_constraintTop_toTopOf="@+id/textView2" />
 
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_category"
-                    app:tint="@color/main_blue" />
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:layout_marginStart="15dp"
+                android:fontFamily="@font/lexend"
+                android:gravity="start"
+                android:padding="8dp"
+                android:text="@string/passout_yearo"
+                android:textColor="@color/main_blue"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:fontFamily="@font/lexend"
-                    android:gravity="start"
-                    android:text="Wishlist"
-                    android:textColor="@color/main_blue"
-                    android:textSize="15sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/cardView"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+            <TextView
+                android:id="@+id/branch_p"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/bg_edt_text"
+                android:fontFamily="@font/lexend"
+                android:gravity="start"
+                android:padding="8dp"
+                android:textColor="@color/grey_800"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView"
+                app:layout_constraintTop_toTopOf="@+id/textView" />
 
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/lexend"
+                android:gravity="start"
+                android:padding="8dp"
+                android:text="@string/countryo"
+                android:textColor="@color/main_blue"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView1" />
+
+            <TextView
+                android:id="@+id/passout_p"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/bg_edt_text"
+                android:fontFamily="@font/lexend"
+                android:gravity="start"
+                android:padding="8dp"
+                android:textColor="@color/grey_800"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView1"
+                app:layout_constraintEnd_toEndOf="@+id/branch_p"
+                app:layout_constraintStart_toEndOf="@+id/textView1"
+                app:layout_constraintTop_toTopOf="@+id/textView1" />
+
+
+            <TextView
+                android:id="@+id/textView40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:fontFamily="@font/lexend"
+                android:gravity="start"
+                android:padding="8dp"
+                android:text="@string/stateo"
+                android:textColor="@color/main_blue"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <TextView
+                android:id="@+id/state_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/bg_edt_text"
+                android:fontFamily="@font/lexend"
+                android:gravity="start"
+                android:padding="8dp"
+                android:textColor="@color/grey_800"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView40"
+                app:layout_constraintEnd_toEndOf="@+id/branch_p"
+                app:layout_constraintStart_toEndOf="@+id/textView40"
+                app:layout_constraintTop_toTopOf="@+id/textView40" />
+
+            <TextView
+                android:id="@+id/textView50"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:layout_marginStart="15dp"
+                android:fontFamily="@font/lexend"
+                android:gravity="start"
+                android:padding="8dp"
+                android:text="@string/cityo"
+                android:textColor="@color/main_blue"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView40" />
+
+            <TextView
+                android:id="@+id/city_p"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/bg_edt_text"
+                android:fontFamily="@font/lexend"
+                android:gravity="start"
+                android:padding="8dp"
+                android:textColor="@color/grey_800"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView50"
+                app:layout_constraintEnd_toEndOf="@+id/branch_p"
+                app:layout_constraintStart_toEndOf="@+id/textView50"
+                app:layout_constraintTop_toTopOf="@+id/textView50" />
+
+
+            <TextView
+                android:id="@+id/textView60"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:layout_marginStart="15dp"
+                android:fontFamily="@font/lexend"
+                android:gravity="start"
+                android:padding="8dp"
+                android:text="@string/gendero"
+                android:textColor="@color/main_blue"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView50" />
+
+            <TextView
+                android:id="@+id/gender_p"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/bg_edt_text"
+                android:fontFamily="@font/lexend"
+                android:gravity="start"
+                android:padding="8dp"
+                android:textColor="@color/grey_800"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView60"
+                app:layout_constraintEnd_toEndOf="@+id/city_p"
+                app:layout_constraintStart_toEndOf="@+id/textView60"
+                app:layout_constraintTop_toTopOf="@+id/textView60" />
+
+
+            <TextView
+                android:id="@+id/textView70"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:layout_marginStart="15dp"
+                android:fontFamily="@font/lexend"
+                android:gravity="start"
+                android:padding="8dp"
+                android:text="@string/bioo"
+                android:textColor="@color/main_blue"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@id/bio"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/bio" />
+
+            <TextView
+                android:id="@+id/bio"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/bg_edt_text"
+                android:fontFamily="@font/lexend"
+                android:gravity="start"
+                android:padding="8dp"
+                android:layout_marginTop="15dp"
+                android:text=""
+                android:textColor="@color/grey_800"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/gender_p"
+                app:layout_constraintStart_toEndOf="@+id/textView70"
+                app:layout_constraintTop_toBottomOf="@+id/gender_p" />
+
+            <TextView
+                android:id="@+id/textView80"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:layout_marginStart="15dp"
+                android:fontFamily="@font/lexend"
+                android:gravity="start"
+                android:padding="8dp"
+                android:text="@string/occupation_p"
+                android:textColor="@color/main_blue"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bio" />
+
+            <TextView
+                android:id="@+id/occup_p"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/bg_edt_text"
+                android:fontFamily="@font/lexend"
+                android:gravity="start"
+                android:padding="8dp"
+                android:textColor="@color/grey_800"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView80"
+                app:layout_constraintEnd_toEndOf="@+id/gender_p"
+                app:layout_constraintStart_toEndOf="@+id/textView80"
+                app:layout_constraintTop_toTopOf="@+id/textView80" />
+
+
+            <TextView
+                android:id="@+id/textView90"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:layout_marginStart="15dp"
+                android:fontFamily="@font/lexend"
+                android:gravity="start"
+                android:padding="8dp"
+                android:text="@string/organizationo"
+                android:textColor="@color/main_blue"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView80" />
+
+            <TextView
+                android:id="@+id/organ_p"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/bg_edt_text"
+                android:fontFamily="@font/lexend"
+                android:gravity="start"
+                android:padding="8dp"
+                android:textColor="@color/grey_800"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView90"
+                app:layout_constraintEnd_toEndOf="@+id/gender_p"
+                app:layout_constraintStart_toEndOf="@+id/textView80"
+                app:layout_constraintTop_toTopOf="@+id/textView90" />
+
+
+
+            <TextView
+                android:id="@+id/textView91"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:layout_marginStart="15dp"
+                android:fontFamily="@font/lexend"
+                android:gravity="start"
+                android:padding="8dp"
+                android:text="@string/designationo"
+                android:textColor="@color/main_blue"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView90" />
+
+            <TextView
+                android:id="@+id/design_p"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/bg_edt_text"
+                android:fontFamily="@font/lexend"
+                android:gravity="start"
+                android:padding="8dp"
+                android:textColor="@color/grey_800"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView91"
+                app:layout_constraintEnd_toEndOf="@+id/organ_p"
+                app:layout_constraintStart_toEndOf="@+id/textView91"
+                app:layout_constraintTop_toTopOf="@+id/textView91" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

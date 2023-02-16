@@ -57,9 +57,6 @@ import java.util.EventListener;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-import www.sanju.motiontoast.MotionToast;
-import www.sanju.motiontoast.MotionToastStyle;
-
 public class Login extends AppCompatActivity {
 
     FadingTextView fadingTextView;
@@ -399,14 +396,45 @@ public class Login extends AppCompatActivity {
                             //reference.child(user.getUid()).child("token").setValue(DeviceToken);
                             //reference.child(user.getUid()).child("uid").setValue(user.getUid());
                             if (val == 2) {
+
+                                SharedPreferences pref = getApplicationContext().getSharedPreferences("our_user?", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = pref.edit();
+                                editor.putBoolean("student", true);
+                                editor.putBoolean("alumni", false);
+                                editor.putBoolean("admin", false);
+                                editor.apply();
+
+                               /* getSharedPreferences("our_user?", MODE_PRIVATE).edit()
+                                        .putString("user_is?", "student").apply();*/
                                 reference.child(user.getUid()).child("id").setValue("Student");
                                 sendToMain();
                             }
                             else if (val == 1) {
+                                /*getSharedPreferences("our_user?", MODE_PRIVATE).edit()
+                                        .putString("user_is?", "alumni").apply();*/
+
+
+                                SharedPreferences pref = getApplicationContext().getSharedPreferences("our_user?", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = pref.edit();
+                                editor.putBoolean("alumni", true);
+                                editor.putBoolean("student", false);
+                                editor.putBoolean("admin", false);
+                                editor.apply();
+
                                 //reference.child(user.getUid()).child("id").setValue("Alumni");
                                 sendToForm();
                             }
                             else if (count == 2) {
+                               /* getSharedPreferences("our_user?", MODE_PRIVATE).edit()
+                                        .putString("user_is?", "admin").apply();*/
+
+                                SharedPreferences pref = getApplicationContext().getSharedPreferences("our_user?", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = pref.edit();
+                                editor.putBoolean("admin", true);
+                                editor.putBoolean("alumni", false);
+                                editor.putBoolean("student", false);
+                                editor.apply();
+
                                 reference.child(user.getUid()).child("id").setValue("Admin");
                                 sendToMain();
                             }
@@ -459,7 +487,7 @@ public class Login extends AppCompatActivity {
 
     private void sendToForm(){
         // Storing the key and its value as the data fetched from edittext
-
+        user = mAuth.getCurrentUser();
         DatabaseReference reference  = FirebaseDatabase.getInstance().getReference().child("users");
 
         reference.addValueEventListener(new ValueEventListener() {
@@ -467,7 +495,7 @@ public class Login extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     if (Objects.requireNonNull(ds.getKey()).equals(user.getUid())) {
-                        sendToMain();
+                        Home_gateway();
                         break;
                     }
                     else {
@@ -478,8 +506,6 @@ public class Login extends AppCompatActivity {
                         DetailsForm fragment = new DetailsForm();
                         fragment.setArguments(bundle);
 
-                        getSharedPreferences("useris?", MODE_PRIVATE).edit()
-                                .putString("the_user_is?", "home").apply();
                         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.layout_login, fragment).addToBackStack(null).commit();
                     }
@@ -548,7 +574,7 @@ public class Login extends AppCompatActivity {
         if((upspeed!=0 && downspeed!=0) || getWifiLevel()!=0) {
             FirebaseMessaging.getInstance().getToken().addOnSuccessListener(token -> {
                 if (!TextUtils.isEmpty(token)) {
-                   // Log.d("token", "retrieve token successful : " + token);
+                    // Log.d("token", "retrieve token successful : " + token);
                 } else {
                     //Log.w("token121", "token should not be null...");
                 }

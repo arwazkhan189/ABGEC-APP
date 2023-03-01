@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:fresco="http://schemas.android.com/tools"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:paddingBottom="10dp"
+    android:background="@drawable/bg_google"
+    android:id="@+id/job_layout"
+    android:backgroundTint="#FFF2E9"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:padding="5dp"
+            android:src="@drawable/ic_share"
+            app:layout_constraintEnd_toEndOf="@+id/img_slider"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/red_dif" />
+
+
+        <ImageView
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/ic_delete"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/apply"
+            app:layout_constraintEnd_toEndOf="@+id/img_slider"
+            app:layout_constraintTop_toTopOf="@+id/apply"
+            app:tint="@color/red_dif" />
+
+        <ImageView
+            android:id="@+id/layer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_layer2"
+            android:layout_marginTop="-20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="#BFE6E5E5" />
+
+        <ImageView
+            android:id="@+id/layer2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_layer3"
+            android:layout_marginEnd="-10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/img_slider"
+            app:layout_constraintEnd_toEndOf="@+id/img_slider"
+            app:layout_constraintTop_toTopOf="@+id/img_slider"
+            app:tint="#BFE6E5E5" />
+
+        <TextView
+            android:id="@+id/job_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/lexend"
+            android:gravity="center"
+            android:paddingStart="15dp"
+            android:paddingEnd="8dp"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+        <RelativeLayout
+            android:id="@+id/img_slider"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/company_name">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/job_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                app:failureImage="@drawable/ic_load_img"
+                app:roundedCornerRadius="20dp"
+                fresco:placeholderImage="@drawable/ic_image_holder" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/apply"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/bg_btn"
+            android:backgroundTint="@color/main_yellow"
+            android:fontFamily="@font/lexend"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/apply"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/delete"
+            app:layout_constraintTop_toBottomOf="@+id/layer2" />
+
+        <TextView
+            android:id="@+id/company_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/lexend"
+            android:paddingStart="15dp"
+            android:drawablePadding="15dp"
+            android:layout_marginTop="15dp"
+            android:paddingEnd="8dp"
+            android:gravity="start"
+            android:drawableStart="@drawable/ic_company"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/img_slider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/job_title" />
+
+        <TextView
+            android:id="@+id/job_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/lexend"
+            android:paddingStart="15dp"
+            android:drawablePadding="15dp"
+            android:layout_marginTop="8dp"
+            android:paddingEnd="8dp"
+            android:gravity="start"
+            android:drawableStart="@drawable/ic_type"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="@+id/company_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/company_name" />
+
+
+        <TextView
+            android:id="@+id/job_location"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableStart="@drawable/ic_location"
+            android:drawablePadding="15dp"
+            android:fontFamily="@font/lexend"
+            android:gravity="start"
+            android:paddingStart="15dp"
+            android:layout_marginTop="8dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="@+id/company_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/job_type" />
+
+
+        <TextView
+            android:id="@+id/job_function"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:layout_marginTop="8dp"
+            android:drawableStart="@drawable/ic_function"
+            android:drawablePadding="15dp"
+            android:fontFamily="@font/lexend"
+            android:gravity="start"
+            android:paddingStart="15dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="@+id/apply"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/level"
+            app:drawableTint="#2d796d" />
+
+
+        <TextView
+            android:id="@+id/job_mode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:drawableStart="@drawable/ic_mode"
+            android:visibility="gone"
+            android:drawablePadding="15dp"
+            android:fontFamily="@font/lexend"
+            android:gravity="start"
+            android:paddingStart="15dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toStartOf="@+id/apply"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/job_location"
+            app:drawableTint="#2d796d"/>
+
+
+        <TextView
+            android:id="@+id/salary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:drawableStart="@drawable/ic_salary"
+            android:visibility="gone"
+            android:drawablePadding="15dp"
+            android:fontFamily="@font/lexend"
+            android:gravity="start"
+            android:paddingStart="15dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toStartOf="@+id/apply"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/job_mode"
+            app:drawableTint="#2d796d"/>
+
+        <TextView
+            android:id="@+id/level"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:layout_marginTop="8dp"
+            android:drawableStart="@drawable/ic_level"
+            android:drawablePadding="15dp"
+            android:fontFamily="@font/lexend"
+            android:gravity="start"
+            android:paddingStart="15dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="@id/apply"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/salary"
+            app:drawableTint="#2d796d"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

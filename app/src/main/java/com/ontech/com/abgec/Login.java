@@ -5,7 +5,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
@@ -14,6 +13,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,10 +32,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.chaos.view.PinView;
 import com.furkanakdemir.surroundcardview.SurroundCardView;
-import com.google.android.gms.dynamic.IFragmentWrapper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -52,10 +50,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.tomer.fadingtextview.FadingTextView;
-
-import java.util.EventListener;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+
+import www.sanju.motiontoast.MotionToast;
 
 public class Login extends AppCompatActivity {
 
@@ -115,6 +113,22 @@ public class Login extends AppCompatActivity {
         alumni = findViewById(R.id.alumni);
         student = findViewById(R.id.student);
 
+
+
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        boolean connected = (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED);
+
+        if (!connected){
+            MotionToast.Companion.darkColorToast(Login.this,
+                    "No Internet",
+                    "Connect with mobile network",
+                    MotionToast.TOAST_NO_INTERNET,
+                    MotionToast.GRAVITY_BOTTOM,
+                    MotionToast.LONG_DURATION,
+                    ResourcesCompat.getFont(Login.this, R.font.lexend));
+        }
 
         get_Otp.setOnClickListener(v -> {
             //check_for_admin();
@@ -524,6 +538,7 @@ public class Login extends AppCompatActivity {
         reference.child(user.getUid()).child("phone").setValue(user.getPhoneNumber());
         reference.child(user.getUid()).child("token").setValue(DeviceToken);
         reference.child(user.getUid()).child("uid").setValue(user.getUid());
+
 
         startActivity(new Intent(Login.this , MainActivity.class));
         finish();

@@ -159,9 +159,7 @@ public class DetailsForm extends Fragment {
         reference.child("phone").setValue(phone);
         reference.child("token").setValue(token);
         reference.child("uid").setValue(uid);
-        reference.child("id").setValue("admin");
         reference.child("dp_link").setValue("");
-
         reference.child("gender").setValue("");
         reference.child("dob").setValue("");
         reference.child("bio").setValue("");

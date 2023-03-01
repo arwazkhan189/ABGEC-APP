@@ -19,6 +19,9 @@
             android:title="Rate Us" />
 
 
+        <item android:id="@+id/list" android:icon="@drawable/ic_rate"
+            android:title="List Of Alumnis" />
+
         <item android:id="@+id/nav_logout" android:icon="@drawable/ic_logout"
             android:title="Logout" />
     </group>

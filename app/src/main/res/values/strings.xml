@@ -39,6 +39,7 @@
     <string name="save">Save</string>
     <string name="your_details">Your Details</string>
     <string name="name">Name*</string>
+    <string name="nameo">Name</string>
     <string name="enter_your_name">Enter Your Name</string>
     <string name="india">India</string>
     <string name="_2015_present">2015 - Present</string>
@@ -68,4 +69,29 @@
     <string name="organizationo">Organization :</string>
     <string name="occupation_p">Occupation :</string>
     <string name="designationo">Designation :</string>
+    <string name="company_name">Company Name*</string>
+    <string name="infosys_wipro_cognizant">Infosys,Wipro,Cognizant..</string>
+    <string name="job_title">Job Title*</string>
+    <string name="software_developer_business_analyst">Software Developer,Business Analyst..</string>
+    <string name="job_location">Job Location*</string>
+    <string name="job_type">Job Type</string>
+    <string name="salary_month">Salary/month</string>
+    <string name="salary">Salary</string>
+    <string name="job_function">Job Function</string>
+    <string name="job_id">Job ID</string>
+    <string name="bottom_bar">bottom_bar</string>
+    <string name="location">Location : </string>
+    <string name="looking_for_a_job">Looking for a job?</string>
+    <string name="explore_alumnis_profile">Explore Alumnis Profile</string>
+    <string name="are_your_sure_you_want_to_logout">Are your sure you want to logout?</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="browse_your_gallery_or_take_a_picture_from_the_phone_camera_to_upload">Browse your Gallery or take a Picture from the phone Camera to upload</string>
+    <string name="add_profile_photo">Add Profile Photo</string>
+    <string name="job_s_applying_link">Job\'s applying link</string>
+    <string name="job_s_link">Job\'s Link*</string>
+    <string name="apply">Apply</string>
+    <string name="list_of_alumnis">List of Alumnis</string>
+    <string name="edit">Edit</string>
+    <string name="xyz_gmail_com">xyz@gmail.com</string>
 </resources>

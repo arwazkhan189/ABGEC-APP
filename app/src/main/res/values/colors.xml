@@ -14,6 +14,8 @@
 
 
     <color name="splash_Bg">#ebfffe</color>
+    <color name="bg_color">#E9E6DF</color>
+    <color name="gas_green">#2d796d</color>
     <color name="light_red">#F5DED8</color>
     <color name="calendar_status">#D6E1FF</color>
     <color name="light_red_shade">#EFBCBC</color>

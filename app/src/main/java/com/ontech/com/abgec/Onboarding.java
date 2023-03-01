@@ -40,7 +40,7 @@ public class Onboarding extends AppCompatActivity {
             finish();
         }
 
-        savePrefsData();
+        //savePrefsData();
 
         Window window = Onboarding.this.getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -56,9 +56,9 @@ public class Onboarding extends AppCompatActivity {
 
         // fill list screen
         final List<intro_ScreenItem> mList = new ArrayList<>();
-        mList.add(new intro_ScreenItem("SELECT ITEMS", "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", R.drawable.ic_welcome));
-        mList.add(new intro_ScreenItem("PAYMENT", "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", R.drawable.ic_welcome));
-        mList.add(new intro_ScreenItem("DELIVERY", "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", R.drawable.ic_welcome));
+        mList.add(new intro_ScreenItem("SEARCH JOBS", "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", R.drawable.ic_onboardjob));
+        mList.add(new intro_ScreenItem("CONNECT WITH ALUMNIS", "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", R.drawable.ic_onboardlist));
+        mList.add(new intro_ScreenItem("ACCESS PROFILE", "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", R.drawable.ic_onboardprofile));
         // setup viewpager
         screenPager = findViewById(R.id.screen_viewpager);
         introViewPagerAdapter = new IntroViewPagerAdapter(this, mList);

@@ -5,11 +5,15 @@
         android:title="Home"
         android:icon="@drawable/ic_home"/>
 
+    <item android:id="@+id/jobs"
+        android:title="Jobs"
+        android:icon="@drawable/ic_job"/>
+
     <item android:id="@+id/search_bar"
         android:title="Alumni"
         android:icon="@drawable/ic_category"/>
 
     <item android:id="@+id/profile"
-        android:title="Account"
+        android:title="Profile"
         android:icon="@drawable/ic_account"/>
 </menu>

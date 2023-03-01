@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fresco="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/bg_color"
     android:focusable="true"
     android:clickable="true"
-    android:layout_marginBottom="70dp"
+    app:layout_constraintBottom_toBottomOf="parent"
     android:id="@+id/swipe_layout"
     tools:context=".Profile">
 
@@ -24,7 +25,7 @@
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:layout_marginEnd="-5dp"
                 android:scaleType="fitXY"
@@ -41,61 +42,67 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="20dp"
+                android:visibility="gone"
                 android:scaleType="fitXY"
                 android:src="@drawable/logo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="25dp"
-                android:elevation="10dp"
-                app:cardCornerRadius="50dp"
+            <TextView
+                android:id="@+id/passout_p"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/bg_rect"
+                android:backgroundTint="@color/light_four"
+                android:fontFamily="@font/lexend"
+                android:gravity="start"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView3">
+                app:layout_constraintStart_toStartOf="@+id/imageView3"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/uploaded_pic"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:padding="5dp"
-                    android:src="@drawable/ic_acc_profile"
-                    app:civ_border_color="@color/main_blue"
-                    app:civ_border_width="1dp"
-                    tools:ignore="ImageContrastCheck" />
+            <LinearLayout
+                android:id="@+id/lay_me"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:background="@color/white"
+                app:layout_constraintStart_toStartOf="@+id/linearLayout8"
+                app:layout_constraintTop_toBottomOf="@+id/branch_p"
+                android:layout_height="wrap_content">
 
-            </androidx.cardview.widget.CardView>
 
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/whatsapp"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:layout_gravity="center"
-                android:layout_marginStart="-5dp"
-                android:layout_marginTop="8dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:src="@drawable/ic_whatsapp"
-                app:layout_constraintStart_toEndOf="@+id/cardView"
-                app:layout_constraintTop_toBottomOf="@+id/name" />
-
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@+id/linearLayout8"
+                app:layout_constraintTop_toBottomOf="@+id/branch_p" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/twitter"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:layout_marginStart="10dp"
                 android:layout_gravity="center"
+                android:visibility="gone"
+                android:layout_marginStart="10dp"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
                 android:src="@drawable/ic_twitter"
                 app:layout_constraintStart_toEndOf="@+id/linkedin"
-                app:layout_constraintTop_toTopOf="@+id/linkedin" />
+                app:layout_constraintTop_toBottomOf="@+id/branch_p" />
 
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -105,11 +112,11 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp"
                 android:paddingTop="5dp"
+                android:visibility="gone"
                 android:paddingBottom="5dp"
                 android:src="@drawable/ic_linkedin"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
                 app:layout_constraintStart_toEndOf="@+id/instagram"
-                app:layout_constraintTop_toTopOf="@+id/instagram" />
+                app:layout_constraintTop_toBottomOf="@+id/branch_p" />
 
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -117,13 +124,13 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_gravity="center"
-                android:paddingTop="5dp"
                 android:layout_marginStart="10dp"
+                android:paddingTop="5dp"
                 android:paddingBottom="5dp"
                 android:src="@drawable/ic_insta"
-                app:layout_constraintBottom_toBottomOf="@+id/whatsapp"
+                android:visibility="gone"
                 app:layout_constraintStart_toEndOf="@+id/whatsapp"
-                app:layout_constraintTop_toTopOf="@+id/whatsapp"
+                app:layout_constraintTop_toBottomOf="@+id/branch_p"
                 tools:ignore="ImageContrastCheck" />
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -131,32 +138,72 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_gravity="center"
-                android:paddingTop="5dp"
                 android:layout_marginStart="10dp"
+                android:paddingTop="5dp"
+                android:visibility="gone"
                 android:paddingBottom="5dp"
                 android:src="@drawable/ic_facebook"
-                app:layout_constraintBottom_toBottomOf="@+id/twitter"
                 app:layout_constraintStart_toEndOf="@+id/twitter"
-                app:layout_constraintTop_toTopOf="@+id/twitter"
+                app:layout_constraintTop_toBottomOf="@+id/branch_p"
                 tools:ignore="ImageContrastCheck" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingTop="60dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView3">
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/lexend"
+                    android:gravity="end"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/gender_p"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/lexend"
+                    android:gravity="start"
+                    android:padding="8dp"
+                    android:textColor="@color/grey_800"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView60"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView60"
+                    app:layout_constraintTop_toTopOf="@+id/textView60" />
+
+            </LinearLayout>
 
 
             <TextView
-                android:id="@+id/name"
+                android:id="@+id/branch_p"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"
                 android:fontFamily="@font/lexend"
-                android:gravity="start"
-                android:text="NIKHIL VERMA"
-                android:textColor="@color/black"
-                android:textSize="17sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/cardView"
-                app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+                android:gravity="center"
+                android:textColor="@color/grey_800"
+                android:background="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/layout_name"
+                app:layout_constraintStart_toStartOf="@+id/layout_name"
+                app:layout_constraintTop_toBottomOf="@+id/layout_name" />
 
 
             <LinearLayout
@@ -164,9 +211,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/whatsapp">
+                app:layout_constraintTop_toBottomOf="@+id/lay_me">
 
                 <LinearLayout
                     android:id="@+id/layout"
@@ -174,6 +222,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_margin="13dp"
+                    android:visibility="gone"
                     android:layout_weight="1"
                     android:background="@drawable/bg_border"
                     android:padding="13dp">
@@ -207,6 +256,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_margin="13dp"
+                    android:visibility="gone"
                     android:layout_weight="1"
                     android:background="@drawable/bg_border"
                     android:padding="13dp">
@@ -235,344 +285,325 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="15dp"
-                android:fontFamily="@font/lexend"
-                android:gravity="start"
-                android:padding="8dp"
-                android:text="@string/brancho"
-                android:textColor="@color/main_blue"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout8" />
-
-            <TextView
-                android:id="@+id/country_p"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="15dp"
-                android:background="@drawable/bg_edt_text"
-                android:fontFamily="@font/lexend"
-                android:gravity="start"
-                android:padding="8dp"
-                android:textColor="@color/grey_800"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView2"
-                app:layout_constraintEnd_toEndOf="@+id/branch_p"
-                app:layout_constraintStart_toEndOf="@+id/textView2"
-                app:layout_constraintTop_toTopOf="@+id/textView2" />
-
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="15dp"
-                android:layout_marginStart="15dp"
-                android:fontFamily="@font/lexend"
-                android:gravity="start"
-                android:padding="8dp"
-                android:text="@string/passout_yearo"
-                android:textColor="@color/main_blue"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-            <TextView
-                android:id="@+id/branch_p"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="15dp"
-                android:background="@drawable/bg_edt_text"
-                android:fontFamily="@font/lexend"
-                android:gravity="start"
-                android:padding="8dp"
-                android:textColor="@color/grey_800"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView"
+            <RelativeLayout
+                android:id="@+id/img_slider"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView3"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView"
-                app:layout_constraintTop_toTopOf="@+id/textView" />
-
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="15dp"
-                android:layout_marginStart="16dp"
-                android:fontFamily="@font/lexend"
-                android:gravity="start"
-                android:padding="8dp"
-                android:text="@string/countryo"
-                android:textColor="@color/main_blue"
-                android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView1" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView3">
 
-            <TextView
-                android:id="@+id/passout_p"
-                android:layout_width="0dp"
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/profile_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:failureImage="@drawable/ic_load_img"
+                app:roundedCornerRadius="50dp"
+                fresco:placeholderImage="@drawable/ic_image_holder" />
+
+        </RelativeLayout>
+
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="15dp"
-                android:background="@drawable/bg_edt_text"
-                android:fontFamily="@font/lexend"
-                android:gravity="start"
-                android:padding="8dp"
-                android:textColor="@color/grey_800"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView1"
-                app:layout_constraintEnd_toEndOf="@+id/branch_p"
-                app:layout_constraintStart_toEndOf="@+id/textView1"
-                app:layout_constraintTop_toTopOf="@+id/textView1" />
-
-
-            <TextView
-                android:id="@+id/textView40"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="15dp"
-                android:fontFamily="@font/lexend"
-                android:gravity="start"
-                android:padding="8dp"
-                android:text="@string/stateo"
-                android:textColor="@color/main_blue"
-                android:textSize="15sp"
+                android:background="@color/white"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout8">
 
-            <TextView
-                android:id="@+id/state_value"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="15dp"
-                android:background="@drawable/bg_edt_text"
-                android:fontFamily="@font/lexend"
-                android:gravity="start"
-                android:padding="8dp"
-                android:textColor="@color/grey_800"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView40"
-                app:layout_constraintEnd_toEndOf="@+id/branch_p"
-                app:layout_constraintStart_toEndOf="@+id/textView40"
-                app:layout_constraintTop_toTopOf="@+id/textView40" />
+                <TextView
+                    android:id="@+id/location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/lexend"
+                    android:gravity="start"
+                    android:text="@string/location"
+                    android:textColor="@color/main_blue"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/constraintLayout" />
 
-            <TextView
-                android:id="@+id/textView50"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="15dp"
+                    android:fontFamily="@font/lexend"
+                    android:gravity="start"
+                    android:padding="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/countryo"
+                    android:textColor="@color/main_blue"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/location" />
+
+
+                <TextView
+                    android:id="@+id/country_p"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/bg_edt_text"
+                    android:fontFamily="@font/lexend"
+                    android:gravity="start"
+                    android:padding="8dp"
+                    android:textColor="@color/grey_800"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView2"
+                    app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+
+                <TextView
+                    android:id="@+id/textView40"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="15dp"
+                    android:fontFamily="@font/lexend"
+                    android:gravity="start"
+                    android:padding="8dp"
+                    android:text="@string/stateo"
+                    android:textColor="@color/main_blue"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+                <TextView
+                    android:id="@+id/state_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="15dp"
+                    android:background="@drawable/bg_edt_text"
+                    android:fontFamily="@font/lexend"
+                    android:gravity="start"
+                    android:padding="8dp"
+                    android:textColor="@color/grey_800"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView40"
+                    app:layout_constraintEnd_toEndOf="@+id/country_p"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/textView40"
+                    app:layout_constraintTop_toTopOf="@+id/textView40"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/textView50"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="15dp"
+                    android:layout_marginStart="15dp"
+                    android:fontFamily="@font/lexend"
+                    android:gravity="start"
+                    android:padding="8dp"
+                    android:text="@string/cityo"
+                    android:textColor="@color/main_blue"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView40" />
+
+                <TextView
+                    android:id="@+id/city_p"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="15dp"
+                    android:background="@drawable/bg_edt_text"
+                    android:fontFamily="@font/lexend"
+                    android:gravity="start"
+                    android:padding="8dp"
+                    android:textColor="@color/grey_800"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView50"
+                    app:layout_constraintEnd_toEndOf="@+id/state_value"
+                    app:layout_constraintStart_toEndOf="@+id/textView50"
+                    app:layout_constraintTop_toTopOf="@+id/textView50" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="15dp"
-                android:layout_marginStart="15dp"
-                android:fontFamily="@font/lexend"
-                android:gravity="start"
-                android:padding="8dp"
-                android:text="@string/cityo"
-                android:textColor="@color/main_blue"
-                android:textSize="15sp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:paddingTop="15dp"
+                android:paddingBottom="40dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView40" />
-
-            <TextView
-                android:id="@+id/city_p"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="15dp"
-                android:background="@drawable/bg_edt_text"
-                android:fontFamily="@font/lexend"
-                android:gravity="start"
-                android:padding="8dp"
-                android:textColor="@color/grey_800"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView50"
-                app:layout_constraintEnd_toEndOf="@+id/branch_p"
-                app:layout_constraintStart_toEndOf="@+id/textView50"
-                app:layout_constraintTop_toTopOf="@+id/textView50" />
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
 
-            <TextView
-                android:id="@+id/textView60"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="15dp"
-                android:layout_marginStart="15dp"
-                android:fontFamily="@font/lexend"
-                android:gravity="start"
-                android:padding="8dp"
-                android:text="@string/gendero"
-                android:textColor="@color/main_blue"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView50" />
+                <TextView
+                    android:id="@+id/about"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/lexend"
+                    android:gravity="start"
+                    android:text="About Me : "
+                    android:textColor="@color/main_blue"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/constraintLayout1" />
 
-            <TextView
-                android:id="@+id/gender_p"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="15dp"
-                android:background="@drawable/bg_edt_text"
-                android:fontFamily="@font/lexend"
-                android:gravity="start"
-                android:padding="8dp"
-                android:textColor="@color/grey_800"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView60"
-                app:layout_constraintEnd_toEndOf="@+id/city_p"
-                app:layout_constraintStart_toEndOf="@+id/textView60"
-                app:layout_constraintTop_toTopOf="@+id/textView60" />
+                <TextView
+                    android:id="@+id/bio"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="15dp"
+                    android:background="@drawable/bg_edt_text"
+                    android:fontFamily="@font/lexend"
+                    android:gravity="start"
+                    android:padding="8dp"
+                    android:text=""
+                    android:textColor="@color/grey_800"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView70"
+                    app:layout_constraintTop_toBottomOf="@+id/about" />
 
-
-            <TextView
-                android:id="@+id/textView70"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="15dp"
-                android:layout_marginStart="15dp"
-                android:fontFamily="@font/lexend"
-                android:gravity="start"
-                android:padding="8dp"
-                android:text="@string/bioo"
-                android:textColor="@color/main_blue"
-                android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="@id/bio"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/bio" />
-
-            <TextView
-                android:id="@+id/bio"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="15dp"
-                android:background="@drawable/bg_edt_text"
-                android:fontFamily="@font/lexend"
-                android:gravity="start"
-                android:padding="8dp"
-                android:layout_marginTop="15dp"
-                android:text=""
-                android:textColor="@color/grey_800"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="@+id/gender_p"
-                app:layout_constraintStart_toEndOf="@+id/textView70"
-                app:layout_constraintTop_toBottomOf="@+id/gender_p" />
-
-            <TextView
-                android:id="@+id/textView80"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="15dp"
-                android:layout_marginStart="15dp"
-                android:fontFamily="@font/lexend"
-                android:gravity="start"
-                android:padding="8dp"
-                android:text="@string/occupation_p"
-                android:textColor="@color/main_blue"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bio" />
-
-            <TextView
-                android:id="@+id/occup_p"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="15dp"
-                android:background="@drawable/bg_edt_text"
-                android:fontFamily="@font/lexend"
-                android:gravity="start"
-                android:padding="8dp"
-                android:textColor="@color/grey_800"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView80"
-                app:layout_constraintEnd_toEndOf="@+id/gender_p"
-                app:layout_constraintStart_toEndOf="@+id/textView80"
-                app:layout_constraintTop_toTopOf="@+id/textView80" />
-
-
-            <TextView
-                android:id="@+id/textView90"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="15dp"
-                android:layout_marginStart="15dp"
-                android:fontFamily="@font/lexend"
-                android:gravity="start"
-                android:padding="8dp"
-                android:text="@string/organizationo"
-                android:textColor="@color/main_blue"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView80" />
-
-            <TextView
-                android:id="@+id/organ_p"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="15dp"
-                android:background="@drawable/bg_edt_text"
-                android:fontFamily="@font/lexend"
-                android:gravity="start"
-                android:padding="8dp"
-                android:textColor="@color/grey_800"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView90"
-                app:layout_constraintEnd_toEndOf="@+id/gender_p"
-                app:layout_constraintStart_toEndOf="@+id/textView80"
-                app:layout_constraintTop_toTopOf="@+id/textView90" />
+                <TextView
+                    android:id="@+id/textView70"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="15dp"
+                    android:fontFamily="@font/lexend"
+                    android:gravity="start"
+                    android:padding="8dp"
+                    android:text="@string/bioo"
+                    android:textColor="@color/main_blue"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="@id/bio"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/bio" />
 
 
 
-            <TextView
-                android:id="@+id/textView91"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="15dp"
-                android:layout_marginStart="15dp"
-                android:fontFamily="@font/lexend"
-                android:gravity="start"
-                android:padding="8dp"
-                android:text="@string/designationo"
-                android:textColor="@color/main_blue"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView90" />
+                <TextView
+                    android:id="@+id/textView80"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="15dp"
+                    android:layout_marginStart="15dp"
+                    android:fontFamily="@font/lexend"
+                    android:gravity="start"
+                    android:padding="8dp"
+                    android:text="@string/occupation_p"
+                    android:textColor="@color/main_blue"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bio" />
 
-            <TextView
-                android:id="@+id/design_p"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="15dp"
-                android:background="@drawable/bg_edt_text"
-                android:fontFamily="@font/lexend"
-                android:gravity="start"
-                android:padding="8dp"
-                android:textColor="@color/grey_800"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView91"
-                app:layout_constraintEnd_toEndOf="@+id/organ_p"
-                app:layout_constraintStart_toEndOf="@+id/textView91"
-                app:layout_constraintTop_toTopOf="@+id/textView91" />
+                <TextView
+                    android:id="@+id/occup_p"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="15dp"
+                    android:background="@drawable/bg_edt_text"
+                    android:fontFamily="@font/lexend"
+                    android:gravity="start"
+                    android:padding="8dp"
+                    android:textColor="@color/grey_800"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView80"
+                    app:layout_constraintEnd_toEndOf="@+id/bio"
+                    app:layout_constraintStart_toEndOf="@+id/textView80"
+                    app:layout_constraintTop_toTopOf="@+id/textView80" />
 
+
+                <TextView
+                    android:id="@+id/textView90"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="15dp"
+                    android:layout_marginStart="15dp"
+                    android:fontFamily="@font/lexend"
+                    android:gravity="start"
+                    android:padding="8dp"
+                    android:text="@string/organizationo"
+                    android:textColor="@color/main_blue"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView80" />
+
+                <TextView
+                    android:id="@+id/organ_p"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="15dp"
+                    android:background="@drawable/bg_edt_text"
+                    android:fontFamily="@font/lexend"
+                    android:gravity="start"
+                    android:padding="8dp"
+                    android:textColor="@color/grey_800"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView90"
+                    app:layout_constraintEnd_toEndOf="@+id/occup_p"
+                    app:layout_constraintStart_toEndOf="@+id/textView80"
+                    app:layout_constraintTop_toTopOf="@+id/textView90" />
+
+
+                <TextView
+                    android:id="@+id/textView91"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="15dp"
+                    android:layout_marginStart="15dp"
+                    android:fontFamily="@font/lexend"
+                    android:gravity="start"
+                    android:padding="8dp"
+                    android:text="@string/designationo"
+                    android:textColor="@color/main_blue"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView90" />
+
+                <TextView
+                    android:id="@+id/design_p"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="15dp"
+                    android:background="@drawable/bg_edt_text"
+                    android:fontFamily="@font/lexend"
+                    android:gravity="start"
+                    android:padding="8dp"
+                    android:textColor="@color/grey_800"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView91"
+                    app:layout_constraintEnd_toEndOf="@+id/bio"
+                    app:layout_constraintStart_toEndOf="@+id/textView91"
+                    app:layout_constraintTop_toTopOf="@+id/textView91" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -37,6 +37,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:23.1.1'
     implementation 'com.google.firebase:firebase-storage:20.0.1'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'com.google.android.gms:play-services-auth:20.4.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
@@ -53,8 +54,8 @@ dependencies {
     //surround card view
     implementation "com.furkanakdemir:surroundcardview:1.0.6"
 
-    // motion toast
-    implementation 'com.github.Spikeysanju:MotionToast:1.4'
+    //motion toast
+    implementation 'com.github.Spikeysanju:MotionToast:1.3.3.4'
 
     //Smooth tab bar
     implementation 'com.github.ibrahimsn98:SmoothBottomBar:1.7.9'
@@ -66,5 +67,25 @@ dependencies {
 
     implementation 'com.github.dhaval2404:imagepicker:2.1'
 
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+
+    //Scalable size unit(support for different size screens)
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+    implementation 'com.intuit.ssp:ssp-android:1.0.6'
+
+    //fresco
+    implementation('com.facebook.fresco:fresco:2.6.0') {
+        exclude group: 'com.facebook.soloader', module: 'soloader'
+        exclude group: 'com.facebook.fresco', module: 'soloader'
+        exclude group: 'com.facebook.fresco', module: 'nativeimagefilters'
+        exclude group: 'com.facebook.fresco', module: 'nativeimagetranscoder'
+        exclude group: 'com.facebook.fresco', module: 'memory-type-native'
+        exclude group: 'com.facebook.fresco', module: 'imagepipeline-native'
+    }
+
+    // For WebP support, including animated WebP
+    implementation 'com.facebook.fresco:animated-webp:2.6.0'
+    implementation 'com.facebook.fresco:webpsupport:2.6.0'
+    implementation 'com.facebook.fresco:fresco:2.6.0'
+
 }

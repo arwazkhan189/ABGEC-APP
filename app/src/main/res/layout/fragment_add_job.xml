@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:rsb="http://schemas.android.com/tools"
     android:background="@color/white"
     android:id="@+id/layout"
     xmlns:fresco="http://schemas.android.com/tools"
@@ -31,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:fontFamily="@font/lexend"
-        android:text="Post Job"
+        android:text="@string/post_job"
         android:layout_marginTop="50dp"
         android:textColor="@color/main_blue"
         android:textSize="25sp"
@@ -44,8 +45,8 @@
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:scrollbars="none"
         android:layout_marginTop="25dp"
+        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -69,10 +70,10 @@
                 android:id="@+id/linearLayout1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/bg_dotted_line"
                 android:orientation="vertical"
                 android:padding="15dp"
-                android:layout_marginTop="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView4">
@@ -85,21 +86,21 @@
                         android:id="@+id/imageView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:contentDescription="TODO"
                         android:foregroundGravity="center"
                         android:src="@drawable/ic_gallery"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:contentDescription="TODO" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/textView5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:fontFamily="@font/lexend"
                         android:gravity="center"
                         android:text="Add Company Image"
-                        android:fontFamily="@font/lexend"
                         android:textColor="#B1BCD2"
                         android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -111,10 +112,10 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:fontFamily="@font/lexend"
                         android:gravity="center"
                         android:paddingStart="20dp"
                         android:paddingEnd="20dp"
-                        android:fontFamily="@font/lexend"
                         android:text="Browse your Gallery or take a Picture from the phone Camera to upload"
                         android:textColor="#B1BCD2"
                         android:textSize="12sp"
@@ -123,19 +124,18 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
 
-                        <com.facebook.drawee.view.SimpleDraweeView
-                            android:id="@+id/image"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:failureImage="@drawable/ic_load_img"
-                            app:roundedCornerRadius="15dp"
-                            fresco:placeholderImage="@drawable/ic_image_holder" />
-
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        app:failureImage="@drawable/ic_load_img"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:roundedCornerRadius="15dp"
+                        fresco:placeholderImage="@drawable/ic_image_holder" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -195,7 +195,7 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
 
-          <!--  <TextView
+            <!--  <TextView
                 android:id="@+id/z"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -265,13 +265,14 @@
                 android:background="@drawable/bg_edt_text"
                 android:ems="10"
                 android:fontFamily="@font/lexend"
-                android:windowSoftInputMode="adjustResize"
+                android:maxLength="5"
                 android:gravity="start|top"
                 android:hint="@string/salary_month"
                 android:importantForAutofill="no"
                 android:inputType="number"
                 android:padding="15dp"
                 android:textSize="16sp"
+                android:windowSoftInputMode="adjustResize"
                 tools:ignore="SpeakableTextPresentCheck" />
 
 

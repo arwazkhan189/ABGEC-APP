@@ -18,10 +18,10 @@
 
         <ImageView
             android:id="@+id/share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_marginEnd="5dp"
-            android:padding="5dp"
+            android:padding="2dp"
             android:src="@drawable/ic_share"
             app:layout_constraintEnd_toEndOf="@+id/img_slider"
             app:layout_constraintTop_toTopOf="parent"
@@ -126,6 +126,7 @@
             android:fontFamily="@font/lexend"
             android:paddingStart="15dp"
             android:drawablePadding="15dp"
+            android:textAllCaps="true"
             android:layout_marginTop="15dp"
             android:paddingEnd="8dp"
             android:gravity="start"
@@ -226,9 +227,9 @@
             android:drawableStart="@drawable/ic_salary"
             android:visibility="gone"
             android:drawablePadding="15dp"
-            android:fontFamily="@font/lexend"
             android:gravity="start"
             android:paddingStart="15dp"
+            android:textStyle="bold"
             android:paddingEnd="8dp"
             android:textColor="@color/black"
             android:textSize="15sp"
@@ -242,7 +243,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:visibility="gone"
             android:layout_marginTop="8dp"
             android:drawableStart="@drawable/ic_level"
             android:drawablePadding="15dp"
@@ -252,11 +252,33 @@
             android:paddingEnd="8dp"
             android:textColor="@color/black"
             android:textSize="15sp"
+            android:visibility="gone"
+            app:drawableTint="#2d796d"
+            app:layout_constraintBottom_toTopOf="@id/job_function"
             app:layout_constraintEnd_toEndOf="@id/apply"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/salary"
-            app:drawableTint="#2d796d"/>
+            app:layout_constraintTop_toBottomOf="@+id/salary" />
+
+        <TextView
+            android:id="@+id/number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawablePadding="15dp"
+            android:fontFamily="@font/lexend"
+            android:gravity="center"
+            android:paddingStart="15dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:visibility="gone"
+            app:drawableTint="#2d796d"
+            app:layout_constraintEnd_toEndOf="@id/apply"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/job_function" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

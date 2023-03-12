@@ -1,16 +1,20 @@
 package com.ontech.com.abgec.Adapter;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -21,36 +25,46 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.ontech.com.abgec.Model.JobModel;
 import com.ontech.com.abgec.R;
 
+import java.math.BigDecimal;
+import java.net.URL;
+import java.text.DecimalFormat;
+import java.text.Format;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
-public class jobAdapter extends RecyclerView.Adapter<jobAdapter.ViewHolder> {
+import www.sanju.motiontoast.MotionToast;
+
+public class JobAdapter extends RecyclerView.Adapter<JobAdapter.ViewHolder> {
 
     List<JobModel> list;
 
-    Context context;
+    Context context1;
     FirebaseAuth auth;
     FirebaseUser user;
     View view;
     Boolean click=true;
     List<String> x;
     DatabaseReference reference;
+    String value;
 
 
-    public jobAdapter(List<JobModel> list, Context context) {
+    public JobAdapter(List<JobModel> list, Context context,String value) {
         this.list = list;
-        this.context = context;
+        this.context1 = context;
+        this.value = value;
+
     }
 
     @NonNull
     @Override
-    public jobAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public JobAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_job,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull jobAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull JobAdapter.ViewHolder holder, int position) {
 
 
         x = new ArrayList<>();
@@ -69,14 +83,18 @@ public class jobAdapter extends RecyclerView.Adapter<jobAdapter.ViewHolder> {
                 e.printStackTrace();
             }
 
+            int amount = Integer.parseInt(list.get(position).getSalary());
+
             holder.company.setText(list.get(position).getCompany());
             holder.jobTitle.setText(list.get(position).getJobTitle());
             holder.jobLocation.setText(list.get(position).getJoblocation());
             holder.jobType.setText(list.get(position).getJobType());
             holder.job_function.setText(list.get(position).getJobFunction());
             holder.job_mode.setText(list.get(position).getJobMode());
-            holder.salary.setText(list.get(position).getSalary());
+
+            holder.salary.setText("₹ " + new DecimalFormat("##,##,##0").format(amount) + "/M.");
             holder.level.setText(list.get(position).getExperience());
+            holder.number.setText(list.get(position).getNumber());
         }
 
         if (list.get(position).getUid().equals(user.getUid())){
@@ -93,6 +111,9 @@ public class jobAdapter extends RecyclerView.Adapter<jobAdapter.ViewHolder> {
                 holder.job_mode.setVisibility(View.VISIBLE);
                 holder.salary.setVisibility(View.VISIBLE);
                 holder.level.setVisibility(View.VISIBLE);
+                if (value.equals("Admin")){
+                    holder.number.setVisibility(View.VISIBLE);
+                }
                 click = false;
             }
             else {
@@ -100,27 +121,62 @@ public class jobAdapter extends RecyclerView.Adapter<jobAdapter.ViewHolder> {
                 holder.job_mode.setVisibility(View.GONE);
                 holder.salary.setVisibility(View.GONE);
                 holder.level.setVisibility(View.GONE);
+                holder.number.setVisibility(View.GONE);
                 click = true;
             }
         });
 
+
+
         holder.apply.setOnClickListener(v->{
-            String url = list.get(position).getUrl();
+
+           /* String url = list.get(position).getUrl();
             Intent i = new Intent(Intent.ACTION_VIEW);
-              i.setData(Uri.parse(url));
-            view.getContext().startActivity(i);
+            i.setData(Uri.parse(url));
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            context1.startActivity(i);*/
+            String url = list.get(position).getUrl().trim().toString();
+            String regex = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";
+            //Matching the given phone number with regular expression
+            boolean result = url.matches(regex);
+            
+            if (check_URL(url)) {
+                try {
+                    Log.e("URL", list.get(position).getUrl() + "");
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    context1.startActivity(browserIntent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else if (result) {
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:"));
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[] {url});
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Job Requirement");
+                context1.startActivity(Intent.createChooser(intent, "Email via..."));
+            }
+            else {
+                MotionToast.Companion.darkColorToast((Activity) view.getContext(),
+                        "Error",
+                        "Not a valid Link or valid Email",
+                        MotionToast.TOAST_ERROR,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.LONG_DURATION,
+                        ResourcesCompat.getFont(context1, R.font.lexend));
+            }
+
         });
 
         holder.share.setOnClickListener(v->{
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("text/plain");
             intent.putExtra(Intent.EXTRA_SUBJECT, "Download App");
-            String message = "Company Name - " + list.get(position).getCompany() +"\n" + "Tijob - " + list.get(position).getJobTitle() +"\n" +
+            String message = "Company Name - " + list.get(position).getCompany() +"\n" + "Job Title - " + list.get(position).getJobTitle() +"\n" +
                     "Location - " + list.get(position).getJoblocation()  + "Mode - " + list.get(position).getJobMode() +"\n" + "Salary - " + list.get(position).getSalary() +"\n" +
                     "Function - " + list.get(position).getJobFunction() + "Experience Level - " + list.get(position).getExperience() +"\n" + "Type - " + list.get(position).getJobType() +
                     "\n\n⭐ ABGEC ⭐";
             intent.putExtra(Intent.EXTRA_TEXT, message);
-            view.getContext().startActivity(Intent.createChooser(intent, "Share using"));
+            context1.startActivity(Intent.createChooser(intent, "Share using"));
         });
     }
 
@@ -131,7 +187,7 @@ public class jobAdapter extends RecyclerView.Adapter<jobAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView company,jobType,jobTitle,jobLocation,apply,job_function,job_mode,salary,level;
+        TextView company,jobType,jobTitle,jobLocation,apply,job_function,job_mode,salary,level,number;
         SimpleDraweeView image;
         ImageView delete,share;
         LinearLayout layout;
@@ -147,11 +203,21 @@ public class jobAdapter extends RecyclerView.Adapter<jobAdapter.ViewHolder> {
             layout = itemView.findViewById(R.id.job_layout);
             apply = itemView.findViewById(R.id.apply);
             job_function = itemView.findViewById(R.id.job_function);
+            number = itemView.findViewById(R.id.number);
             job_mode = itemView.findViewById(R.id.job_mode);
             salary = itemView.findViewById(R.id.salary);
             level = itemView.findViewById(R.id.level);
             delete = itemView.findViewById(R.id.delete);
             share = itemView.findViewById(R.id.share);
+        }
+    }
+
+    public static boolean check_URL(String str) {
+        try {
+            new URL(str).toURI();
+            return true;
+        }catch (Exception e) {
+            return false;
         }
     }
 

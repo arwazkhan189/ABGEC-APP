@@ -3,7 +3,14 @@
     <group android:checkableBehavior="single">
         <item android:id="@+id/nav_home" android:icon="@drawable/ic_home"
             android:title="Home" />
-        <item android:id="@+id/nav_contactUs" android:icon="@drawable/ic_policy"
+
+        <item android:id="@+id/gallery" android:icon="@drawable/ic_policy"
+            android:title="Gallery"  />
+
+        <item android:id="@+id/list" android:icon="@drawable/ic_rate"
+            android:title="List Of Alumnis" />
+
+        <item android:id="@+id/privacy" android:icon="@drawable/ic_policy"
             android:title="Privacy Policy"  />
         <item android:id="@+id/nav_aboutUs" android:icon="@drawable/logo"
             android:title="About Us" />
@@ -17,10 +24,6 @@
 
         <item android:id="@+id/nav_rate" android:icon="@drawable/ic_rate"
             android:title="Rate Us" />
-
-
-        <item android:id="@+id/list" android:icon="@drawable/ic_rate"
-            android:title="List Of Alumnis" />
 
         <item android:id="@+id/nav_logout" android:icon="@drawable/ic_logout"
             android:title="Logout" />

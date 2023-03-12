@@ -21,14 +21,12 @@ import android.os.Bundle;
 import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
@@ -36,7 +34,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -44,29 +41,33 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
+import com.ontech.com.abgec.fcm.topic;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Objects;
 
 import www.sanju.motiontoast.MotionToast;
-
 
 public class AddJob extends Fragment implements AdapterView.OnItemSelectedListener{
 
@@ -76,7 +77,7 @@ public class AddJob extends Fragment implements AdapterView.OnItemSelectedListen
    ImageView back;
    Dialog dialog;
    public static final int REQUEST_CODE_STORAGE_PERMISSION = 1;
-   DatabaseReference reference;
+   DatabaseReference reference,user_ref;
    FirebaseUser user;
    LinearLayout add_img;
    FirebaseAuth auth;
@@ -88,6 +89,8 @@ public class AddJob extends Fragment implements AdapterView.OnItemSelectedListen
    ActivityResultLauncher<Intent> startActivityForImage;
    SimpleDraweeView imageNote;
    TextView save;
+   String device_token;
+
    String[] job_types = {"Full-Time", "Part-Time", "Internship","Contract","Temporary","Volunteer","Other"};
    String[] experience_array = {"Internship", "Entry Level", "Associate","Mid-Senior Level","Director","Executive","Other"};
    String[] job_mode_array = {"Onsite", "Remote", "Hybrid"};
@@ -104,6 +107,7 @@ public class AddJob extends Fragment implements AdapterView.OnItemSelectedListen
         save = view.findViewById(R.id.submit);
         lay = view.findViewById(R.id.layout);
         link = view.findViewById(R.id.url);
+
 
         if (contextNullSafe == null) getContextNullSafety();
 
@@ -131,6 +135,7 @@ public class AddJob extends Fragment implements AdapterView.OnItemSelectedListen
         experience_level = view.findViewById(R.id.experience_level);
         back = view.findViewById(R.id.back);
         reference = FirebaseDatabase.getInstance().getReference().child("jobs");
+        user_ref = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
         company = view.findViewById(R.id.company);
         job_title = view.findViewById(R.id.job_title);
         job_location = view.findViewById(R.id.job_location);
@@ -140,7 +145,6 @@ public class AddJob extends Fragment implements AdapterView.OnItemSelectedListen
         job_function.setOnItemSelectedListener(this);
         job_mode.setOnItemSelectedListener(this);
         experience_level.setOnItemSelectedListener(this);
-
         //job type
         job_ad = new ArrayAdapter(
                 getContextNullSafety(),
@@ -171,8 +175,6 @@ public class AddJob extends Fragment implements AdapterView.OnItemSelectedListen
                         .simple_spinner_dropdown_item);
         job_mode.setAdapter(job_mod);
 
-        //experience_level
-
         experience_lvl = new ArrayAdapter(
                 getContextNullSafety(),
                 android.R.layout.simple_spinner_item,
@@ -190,14 +192,30 @@ public class AddJob extends Fragment implements AdapterView.OnItemSelectedListen
             }
         });
 
-
         save.setOnClickListener(v-> {
 
             if (!company.getText().toString().trim().equals("")) {
                 if (!job_title.getText().toString().trim().equals("")) {
                     if (!job_location.getText().toString().trim().equals("")) {
                         if (!link.getText().toString().trim().equals("")) {
-                            dataPush();
+                            String url = link.getText().toString().trim();
+                            String regex = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";
+                            //Matching the given phone number with regular expression
+                            boolean result = url.matches(regex);
+
+                            if (check_URL(url)) {
+                                dataPush();
+                            } else if (result) {
+                                dataPush();
+                            } else {
+                                MotionToast.Companion.darkColorToast(requireActivity(),
+                                        "Error",
+                                        "Please add a valid Link or valid Email Id",
+                                        MotionToast.TOAST_ERROR,
+                                        MotionToast.GRAVITY_BOTTOM,
+                                        MotionToast.LONG_DURATION,
+                                        ResourcesCompat.getFont(requireActivity(), R.font.lexend));
+                            }
                         } else {
                             link.setError("Empty");
                             Snackbar.make(lay, "Please add a link for applying to job", Snackbar.LENGTH_LONG)
@@ -323,8 +341,22 @@ public class AddJob extends Fragment implements AdapterView.OnItemSelectedListen
                                             reference.child(pushkey).child("pushkey").setValue(pushkey);
 
 
-                                            /*topic topic=new topic();
-                                            topic.noti(name+" just made a post",title.getText().toString()+", Tap to open.");*/
+                                            user_ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                    if(snapshot.child(user.getUid()).child("token").exists()){
+
+                                                        device_token= snapshot.child(user.getUid()).child("token").getValue(String.class);
+                                                        Log.e("hdhhd",device_token);
+                                                    }
+                                                }
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError error) {}
+                                            });
+
+                                            topic topic=new topic();
+                                            topic.noti(company.getText().toString()+" is hiring for ",job_title.getText().toString() + ", Tap to open.","fromjob");
+
 
                                             dialog.dismiss();
                                             MotionToast.Companion.darkColorToast(getActivity(),
@@ -367,9 +399,25 @@ public class AddJob extends Fragment implements AdapterView.OnItemSelectedListen
             reference.child(pushkey).child("salary").setValue(salary.getText().toString());
             reference.child(pushkey).child("uid").setValue(user.getUid());
             reference.child(pushkey).child("number").setValue(user.getPhoneNumber());
+            reference.child(pushkey).child("url").setValue(link.getText().toString());
             reference.child(pushkey).child("pushkey").setValue(pushkey);
+            user_ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.child(user.getUid()).child("token").exists()){
+                        device_token= snapshot.child(user.getUid()).child("token").getValue(String.class);
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {}
+            });
 
-            MotionToast.Companion.darkColorToast(getActivity(),
+
+            topic topic=new topic();
+            topic.noti(company.getText().toString().toUpperCase() + " is hiring for ",job_title.getText().toString().toUpperCase() + ", Tap to open.","fromjob");
+
+
+            MotionToast.Companion.darkColorToast(requireActivity(),
                     "Posted Successfully!!",
                     "Hurray\uD83C\uDF89\uD83C\uDF89",
                     MotionToast.TOAST_SUCCESS,
@@ -579,6 +627,15 @@ public class AddJob extends Fragment implements AdapterView.OnItemSelectedListen
         }
 
         return inSampleSize;
+    }
+
+    public static boolean check_URL(String str) {
+        try {
+            new URL(str).toURI();
+            return true;
+        }catch (Exception e) {
+            return false;
+        }
     }
 
     public Context getContextNullSafety() {

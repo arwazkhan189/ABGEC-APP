@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -28,6 +29,7 @@ public class EditList extends Fragment {
     String name,branch,passout,organisation,designation,number,city,state,country,email,uid,pushkey;
     EditText name_ed,branch_ed,passout_ed,organisation_ed,designation_ed,number_ed,city_ed,state_ed,country_ed,email_ed;
     TextView submit;
+    ImageView back;
     DatabaseReference reference;
     Dialog dialog;
 
@@ -47,6 +49,7 @@ public class EditList extends Fragment {
         state_ed = view.findViewById(R.id.state);
         country_ed = view.findViewById(R.id.country);
         email_ed = view.findViewById(R.id.email);
+        back = view.findViewById(R.id.back);
         submit  = view.findViewById(R.id.submit);
 
 
@@ -86,6 +89,10 @@ public class EditList extends Fragment {
 
         });
 
+        back.setOnClickListener(v->{
+            back();
+        });
+
         return view;
     }
 
@@ -115,6 +122,12 @@ public class EditList extends Fragment {
             }
         }, 1000);
     }
+
+    private void back(){
+        assert getFragmentManager() != null;
+        getFragmentManager().beginTransaction().remove(EditList.this).commit();
+    }
+
 
     public Context getContextNullSafety() {
         if (getContext() != null) return getContext();

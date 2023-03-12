@@ -435,7 +435,7 @@ public class Login extends AppCompatActivity {
                                 editor.putBoolean("admin", false);
                                 editor.apply();
 
-                                //reference.child(user.getUid()).child("id").setValue("Alumni");
+                                reference.child(user.getUid()).child("id").setValue("Alumni");
                                 sendToForm();
                             }
                             else if (count == 2) {
@@ -499,38 +499,14 @@ public class Login extends AppCompatActivity {
         finish();
     }
 
-    private void sendToForm(){
-        // Storing the key and its value as the data fetched from edittext
-        user = mAuth.getCurrentUser();
-        DatabaseReference reference  = FirebaseDatabase.getInstance().getReference().child("users");
+    private void sendToForm() {
 
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    if (Objects.requireNonNull(ds.getKey()).equals(user.getUid())) {
-                        Home_gateway();
-                        break;
-                    }
-                    else {
-                        Bundle bundle = new Bundle();
-                        bundle.putString("phone", user.getPhoneNumber());
-                        bundle.putString("token", DeviceToken);
-                        bundle.putString("uid", user.getUid());
-                        DetailsForm fragment = new DetailsForm();
-                        fragment.setArguments(bundle);
-
-                        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.layout_login, fragment).addToBackStack(null).commit();
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        reference.child(user.getUid()).child("phone").setValue(user.getPhoneNumber());
+        reference.child(user.getUid()).child("token").setValue(DeviceToken);
+        reference.child(user.getUid()).child("uid").setValue(user.getUid());
+        DetailsForm fragment = new DetailsForm();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.layout_login, fragment).addToBackStack(null).commit();
     }
 
     private void sendToMain(){

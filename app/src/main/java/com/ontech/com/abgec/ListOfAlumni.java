@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -31,10 +33,11 @@ import java.util.Objects;
 public class ListOfAlumni extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    EditText editText;
+    EditText search;
     DatabaseReference reference;
     ArrayList<alumnilistModel> list;
-    ImageView loadimage;
+    ArrayList<alumnilistModel> mylist;
+    ImageView loadimage,back;
     list_adapter list_adapter;
     TextView loadText;
 
@@ -48,13 +51,14 @@ public class ListOfAlumni extends AppCompatActivity {
         window.setStatusBarColor(ContextCompat.getColor(ListOfAlumni.this, R.color.white));
 
         recyclerView = findViewById(R.id.recyclerView);
-        editText = findViewById(R.id.input);
+        search = findViewById(R.id.input);
         list_adapter = new list_adapter(ListOfAlumni.this,list);
         reference  = FirebaseDatabase.getInstance().getReference().child("ALUMNI_DATA").child("data");
         list = new ArrayList<>();
-
+        mylist = new ArrayList<>();
         loadimage = findViewById(R.id.loadImage);
         loadText = findViewById(R.id.loadText);
+        back = findViewById(R.id.imageView4);
         LinearLayoutManager layoutManager = new LinearLayoutManager(ListOfAlumni.this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setItemViewCacheSize(500);
@@ -62,10 +66,27 @@ public class ListOfAlumni extends AppCompatActivity {
 
         getList();
 
+        search.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {}
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                search(s+"");
+            }
+        });
+
+        back.setOnClickListener(v->{
+            finish();
+        });
+
+
     }
 
     private void getList(){
         list.clear();
+        mylist.clear();
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @SuppressLint("NotifyDataSetChanged")
@@ -88,5 +109,30 @@ public class ListOfAlumni extends AppCompatActivity {
 
             }
         });
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private void search (String s) {
+        mylist.clear();
+        for (alumnilistModel object : list) {
+            try {
+                if (object.getName().toLowerCase().contains(s.toLowerCase().trim())) {
+                    mylist.add(object);
+                } else if (object.getBranch().toLowerCase().contains(s.toLowerCase().trim())) {
+                    mylist.add(object);
+                } else if (object.getPassoutYear().toLowerCase().contains(s.toLowerCase().trim())) {
+                    mylist.add(object);
+                }
+                else if (object.getState().toLowerCase().contains(s.toLowerCase().trim())) {
+                    mylist.add(object);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        list_adapter userAdapter = new list_adapter(ListOfAlumni.this, mylist);
+        userAdapter.notifyDataSetChanged();
+        if (recyclerView != null)
+            recyclerView.setAdapter(userAdapter);
     }
 }

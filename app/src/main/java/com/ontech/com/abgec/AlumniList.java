@@ -6,21 +6,22 @@ import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.util.Log;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.core.ImageTranscoderType;
@@ -47,11 +48,15 @@ public class AlumniList extends Fragment {
     Context contextNullSafe;
     DatabaseReference reference;
     RecyclerView recyclerView;
+    EditText search;
     ArrayList<user_dataModel> list;
-    ImageView loadimage;
+    ArrayList<user_dataModel> mylist;
+    LottieAnimationView loadimage;
     TextView loadText;
+
     SmoothBottomBar smoothBottomBar;
-    user_adapter  syncAdapter;
+    SwipeRefreshLayout mSwipeRefreshLayout;
+    user_adapter userAdapter;
     FirebaseUser user;
     FirebaseAuth auth;
 
@@ -61,16 +66,15 @@ public class AlumniList extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_alumni_list, container, false);
 
-
-
         if (contextNullSafe == null) getContextNullSafety();
 //Hide the keyboard
         requireActivity().getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
 
-
+        mSwipeRefreshLayout = view.findViewById(R.id.swipe_layout);
         list=new ArrayList<>();
+        mylist=new ArrayList<>();
         recyclerView = view.findViewById(R.id.recyclerView);
         auth=FirebaseAuth.getInstance();
         user=auth.getCurrentUser();
@@ -82,7 +86,7 @@ public class AlumniList extends Fragment {
         recyclerView.setItemViewCacheSize(500);
         recyclerView.setLayoutManager(layoutManager);
 
-
+        search=view.findViewById(R.id.input);
         smoothBottomBar=requireActivity().findViewById(R.id.bottomBar);
         smoothBottomBar.setItemActiveIndex(2);
 
@@ -98,6 +102,8 @@ public class AlumniList extends Fragment {
 
 
         getAlumnis();
+
+        mSwipeRefreshLayout.setOnRefreshListener(this::getAlumnis);
         OnBackPressedCallback callback=new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -114,28 +120,40 @@ public class AlumniList extends Fragment {
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(),callback);
 
+        search.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {}
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                search(s+"");
+            }
+        });
+
         return view;
     }
 
-
-
-    private void getAlumnis(){
+    private void getAlumnis() {
+        mylist.clear();
         list.clear();
+        mSwipeRefreshLayout.setRefreshing(true);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot ds:snapshot.getChildren()) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
                     if (Objects.equals(snapshot.child(Objects.requireNonNull(ds.getKey())).child("id").getValue(String.class), "Alumni")) {
                         list.add(snapshot.child(Objects.requireNonNull(ds.getKey())).getValue(user_dataModel.class));
                     }
                 }
+                mSwipeRefreshLayout.setRefreshing(false);
                 loadimage.setVisibility(View.GONE);
                 loadText.setVisibility(View.GONE);
-                syncAdapter = new user_adapter(contextNullSafe,list);
-                syncAdapter.notifyDataSetChanged();
-                if(recyclerView!=null)
-                    recyclerView.setAdapter(syncAdapter);
+                userAdapter = new user_adapter(contextNullSafe, list);
+                userAdapter.notifyDataSetChanged();
+                if (recyclerView != null)
+                    recyclerView.setAdapter(userAdapter);
             }
 
             @Override
@@ -143,7 +161,33 @@ public class AlumniList extends Fragment {
 
             }
         });
+    }
 
+        @SuppressLint("NotifyDataSetChanged")
+        private void search (String s) {
+            mylist.clear();
+            for (user_dataModel object : list) {
+                try {
+                    if (object.getName().toLowerCase().contains(s.toLowerCase().trim())) {
+                        mylist.add(object);
+                    } else if (object.getBranch().toLowerCase().contains(s.toLowerCase().trim())) {
+                        mylist.add(object);
+                    } else if (object.getPassout().toLowerCase().contains(s.toLowerCase().trim())) {
+                        mylist.add(object);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            user_adapter userAdapter = new user_adapter(getContextNullSafety(), mylist);
+            userAdapter.notifyDataSetChanged();
+            if (recyclerView != null)
+                recyclerView.setAdapter(userAdapter);
+        }
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        contextNullSafe = context;
     }
     public Context getContextNullSafety() {
         if (getContext() != null) return getContext();

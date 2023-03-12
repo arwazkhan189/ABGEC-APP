@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
@@ -22,8 +23,11 @@ import android.widget.TextView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class DetailsForm extends Fragment {
@@ -31,6 +35,7 @@ public class DetailsForm extends Fragment {
 
     View view;
     TextView submit,name,state,country,city;
+    String nam,stat,count,cit,br,pass;
     AutoCompleteTextView branch,passout_yr;
     ConstraintLayout lay;
     DatabaseReference reference;
@@ -43,13 +48,10 @@ public class DetailsForm extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-        assert getArguments() != null;
-        phone = getArguments().getString("phone");
-        token = getArguments().getString("token");
-        uid = getArguments().getString("uid");
-
         view = inflater.inflate(R.layout.fragment_details_form, container, false);
+
+
+
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
 
@@ -80,6 +82,8 @@ public class DetailsForm extends Fragment {
 
         lay = view.findViewById(R.id.lay);
         reference = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
+
+        valueGetting();
 
         submit.setOnClickListener(v-> {
             if(!name.getText().toString().trim().equals("")){
@@ -148,6 +152,36 @@ public class DetailsForm extends Fragment {
         return  view;
     }
 
+    private void valueGetting() {
+
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    br = snapshot.child("branch").getValue(String.class);
+                    pass = snapshot.child("passout").getValue(String.class);
+                    count = snapshot.child("country").getValue(String.class);
+                    stat = snapshot.child("state").getValue(String.class);
+                    cit = snapshot.child("city").getValue(String.class);
+                    phone = snapshot.child("phone").getValue(String.class);
+                    nam = snapshot.child("name").getValue(String.class);
+
+                    name.setText(nam);
+                    branch.setText(br);
+                    passout_yr.setText(pass);
+                    state.setText(stat);
+                    country.setText(count);
+                    city.setText(cit);
+                    state.setText(stat);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     private void datasend(){
         reference.child("name").setValue(name.getText().toString());
         reference.child("branch").setValue(branch.getText().toString());

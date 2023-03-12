@@ -88,10 +88,42 @@
     <string name="cancel">Cancel</string>
     <string name="browse_your_gallery_or_take_a_picture_from_the_phone_camera_to_upload">Browse your Gallery or take a Picture from the phone Camera to upload</string>
     <string name="add_profile_photo">Add Profile Photo</string>
-    <string name="job_s_applying_link">Job\'s applying link</string>
-    <string name="job_s_link">Job\'s Link*</string>
+    <string name="job_s_applying_link">Job\'s applying link or Email Address </string>
+    <string name="job_s_link">Job\'s Link / Email Address*</string>
     <string name="apply">Apply</string>
     <string name="list_of_alumnis">List of Alumnis</string>
     <string name="edit">Edit</string>
     <string name="xyz_gmail_com">xyz@gmail.com</string>
+    <string name="add_post">Add Post</string>
+    <string name="add_job">Add Job</string>
+    <string name="post_job">Post Job</string>
+    <string name="welcome">Welcome</string>
+    <string name="loading_images">Loading Images</string>
+    <string name="about_meo">About Me :</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="privacy_text">Thank you for your interest in ABGEC social media app. As the app owner, we are committed to protecting the privacy of our users. This Privacy Policy outlines how we collect, use, and share information about our users.
+
+        <b><u>\n\n1. Information we collect :</u> </b>
+We collect information when you register for an account, create a profile, post content, and interact with other users on the app. The information we collect includes your name, email address, date of birth, gender, profile picture, location, and other information you provide.
+
+        <b><u>\n\n2. How we use your information :</u> </b>
+We use your information to provide and improve our services, communicate with you, and personalize your experience on the app. We may also use your information to conduct research and analytics, and to comply with legal requirements.
+
+        <b><u>\n\n3. Sharing of your information :</u> </b>
+We do not sell or rent your personal information to third parties. We may share your information with service providers who assist us in providing our services, or with third parties who perform advertising or marketing services on our behalf. We may also share your information when required by law or to protect our rights or the rights of others.
+
+        <b><u>\n\n4. Security of your information :</u> </b>
+We take reasonable measures to protect the security of your information, including using encryption and secure storage methods. However, no method of transmission over the internet or electronic storage is 100% secure, and we cannot guarantee the security of your information.
+
+        <b><u>\n\n5. Your choices :</u> </b>
+You can control the information you provide to us and how we use it. You can update your profile information, adjust your privacy settings, and choose whether to receive promotional communications from us. You can also delete your account and request that we delete your information.
+
+        <b><u>\n\n6. Children\'s privacy :</u> </b>
+Our app is not intended for children under the age of 13, and we do not knowingly collect personal information from children under the age of 13. If you believe we have collected information from a child under the age of 13, please contact us immediately.
+
+        <b><u>\n\n7. Changes to this Privacy Policy :</u></b>
+We may update this Privacy Policy from time to time. If we make material changes, we will notify you by email or by posting a notice on the app.
+
+        \n\nIf you have any questions or concerns about this Privacy Policy, please contact us at <b>nikhilverma.nv345@gmail.com</b></string>
+    <string name="memories_we_made">Memories We Made</string>
 </resources>

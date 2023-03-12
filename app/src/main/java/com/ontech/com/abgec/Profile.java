@@ -15,9 +15,11 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +57,7 @@ public class Profile extends Fragment {
     TextView gend;
     Dialog dialog;
     CircleImageView fb, twitter, linkidin, insta,whatsapp;
+    SwipeRefreshLayout mSwipeRefreshLayout;
     String gen, dateOfBirth, bioo, fcb, twt, lin, inst, occup, organ, desig, nam, br, py, countr, stat, cit,dp_link,phone;
     String uid_of_user,addtostack;
     SmoothBottomBar smoothBottomBar;
@@ -94,7 +97,9 @@ public class Profile extends Fragment {
             uid_of_user = user.getUid();//check for uid bundle if yes then don't do this and vice-versa.
         }
 
-        reference = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
+
+        mSwipeRefreshLayout = view.findViewById(R.id.swipe_layout);
+
         reference = FirebaseDatabase.getInstance().getReference().child("users");
         name = view.findViewById(R.id.name);
         state =  view.findViewById(R.id.state_value);
@@ -113,6 +118,8 @@ public class Profile extends Fragment {
         bio =  view.findViewById(R.id.bio);
         gend = view.findViewById(R.id.gender_p);
         profile_pic = view.findViewById(R.id.profile_img);
+
+
 
 
 
@@ -148,7 +155,7 @@ public class Profile extends Fragment {
 
         valueGetting();
 
-
+        mSwipeRefreshLayout.setOnRefreshListener(this::valueGetting);
 
         OnBackPressedCallback callback=new OnBackPressedCallback(true) {
             @Override
@@ -278,9 +285,11 @@ public class Profile extends Fragment {
     private void valueGetting() {
 
         reference = FirebaseDatabase.getInstance().getReference().child("users").child(uid_of_user);
+        mSwipeRefreshLayout.setRefreshing(true);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                 if (snapshot.exists()) {
                     gen = snapshot.child("gender").getValue(String.class);
                     dateOfBirth = snapshot.child("dob").getValue(String.class);
@@ -307,7 +316,6 @@ public class Profile extends Fragment {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
 
                     if(!fcb.equals("")){
                         fb.setVisibility(View.VISIBLE);
@@ -353,7 +361,7 @@ public class Profile extends Fragment {
                     else
                         gend.setText("(He/him)");
                 }
-
+                mSwipeRefreshLayout.setRefreshing(false);
                 whatsapp.setOnClickListener(v->{
                     String phoneNumber = phone;
                     String message = "Hello,sir how are you?"; // Replace with message

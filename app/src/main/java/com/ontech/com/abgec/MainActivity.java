@@ -19,23 +19,25 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.EditText;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.ontech.com.abgec.fcm.topic;
 
 import java.io.File;
 import java.util.Objects;
@@ -53,13 +55,14 @@ public class MainActivity extends AppCompatActivity {
     OnBackPressedListener onBackpressedListener;
     GoogleSignInClient mGoogleSignInClient;
     DrawerLayout drawer;
-    LottieAnimationView add_job;
     Dialog dialog;
     FirebaseAuth auth;
     FirebaseUser user;
-    TextView yes,no;
+    Boolean closed = false;
+    TextView yes,no,text1,text2;
     ImageView globe;
-
+    FloatingActionButton add,job,post;
+    Animation rotateOpen,rotateClose,fromBottom,toBottom;
 
 
     @Override
@@ -70,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         navView = findViewById(R.id.navView);
         drawer = findViewById(R.id.drawer);
-        add_job = findViewById(R.id.add_job);
         setStatusBarTransparent();
 
         auth = FirebaseAuth.getInstance();
@@ -78,7 +80,18 @@ public class MainActivity extends AppCompatActivity {
        /* user =
        //SharedPreferences sh = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);*/
 
+        rotateOpen =  AnimationUtils.loadAnimation(this,R.anim.rotate_open_anim);
+        rotateClose = AnimationUtils.loadAnimation(this,R.anim.rotate_close_anim);
+        fromBottom = AnimationUtils.loadAnimation(this,R.anim.from_bottom_anim);
+        toBottom = AnimationUtils.loadAnimation(this,R.anim.to_bottom_anim);
+
+
+        text1 = findViewById(R.id.textView19);
+        text2 = findViewById(R.id.textView20);
         globe = findViewById(R.id.globe);
+        add = findViewById(R.id.add_f);
+        job = findViewById(R.id.job);
+        post = findViewById(R.id.post);
 
         setSupportActionBar(toolbar);
 
@@ -92,18 +105,35 @@ public class MainActivity extends AppCompatActivity {
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.main_blue));
         toggle.syncState();
 
-        add_job.setOnClickListener(v -> {
-            MainActivity.this.getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.change_layout, new AddJob(), "list_announcement")
-                    .commit();
-        });
-
         globe.setOnClickListener(v -> {
             String url = "https://abgec.in/";
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setData(Uri.parse(url));
             startActivity(i);
+        });
+
+        add.setOnClickListener(v->{
+            OnAddButtonClick();
+        });
+
+
+
+        //edit fab button on click
+        job.setOnClickListener(v->{
+
+            OnAddButtonClick();
+            MainActivity.this.getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.change_layout, new AddJob(), "list_announcement")
+                    .commit();
+
+
+        });
+        //setting fab button on click
+        post.setOnClickListener(v->{
+
+            OnAddButtonClick();
+            Toast.makeText(this,"Search",Toast.LENGTH_SHORT).show();
         });
 
         ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -128,10 +158,33 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.nav_home:
-                        fragment = new Post();
                         drawer.closeDrawer(GravityCompat.START);
-                        callFragment(fragment);
+                        navView.getMenu().getItem(0).setCheckable(true);
                         break;
+
+                    case R.id.list:
+
+                        drawer.closeDrawer(GravityCompat.START);
+                        Intent intent = new Intent(MainActivity.this,ListOfAlumni.class);
+                        navView.getMenu().getItem(2).setCheckable(false);
+                        startActivity(intent);
+                        break;
+
+                    case R.id.gallery:
+                        fragment = new ImageFragment();
+                        drawer.closeDrawer(GravityCompat.START);
+                        navView.getMenu().getItem(1).setCheckable(false);
+                        callFragment2(fragment);
+                        break;
+
+                    case R.id.privacy:
+                        fragment = new Privacy();
+                        drawer.closeDrawer(GravityCompat.START);
+                        navView.getMenu().getItem(3).setCheckable(false);
+                        callFragment2(fragment);
+                        break;
+
+
 
                     case R.id.nav_logout:
 
@@ -144,36 +197,22 @@ public class MainActivity extends AppCompatActivity {
                         no = dialog.findViewById(R.id.no);
 
                         yes.setOnClickListener(v->{
-                            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                                    .requestIdToken(getString(R.string.default_web_client_id))
-                                    .requestEmail()
-                                    .build();
-                            mGoogleSignInClient = GoogleSignIn.getClient(MainActivity.this, gso);
-
-                            mGoogleSignInClient.signOut()
-                                    .addOnCompleteListener(MainActivity.this, task -> MotionToast.Companion.darkColorToast(MainActivity.this,
-                                            "Logout Successfull",
-                                            "Sign out Successfull!",
-                                            MotionToast.TOAST_SUCCESS,
-                                            MotionToast.GRAVITY_BOTTOM,
-                                            MotionToast.LONG_DURATION,
-                                            ResourcesCompat.getFont(MainActivity.this, R.font.lexend)));
-                            auth.signOut();
+                            dialog.dismiss();
+                            navView.getMenu().getItem(8).setCheckable(false);
                             //deleteCache(MainActivity.this);
+                            auth.signOut();
+                            startActivity(new Intent(MainActivity.this , Login.class));
                             finish();
                         });
 
 
                         no.setOnClickListener(v->{
                             dialog.dismiss();
+                            navView.getMenu().getItem(8).setCheckable(false);
                             drawer.closeDrawer(GravityCompat.START);
                         });
+                        break;
 
-                    case R.id.list:
-
-                        drawer.closeDrawer(GravityCompat.START);
-                        Intent intent = new Intent(MainActivity.this,ListOfAlumni.class);
-                        startActivity(intent);
                        /* fragment = new HomePage();
                         drawer.closeDrawer(GravityCompat.START);
                         //  getSupportActionBar().setTitle("About US");
@@ -186,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         if (check_for_student()) {
-            add_job.setVisibility(View.GONE);
+            add.setVisibility(View.GONE);
         }
 
         if (getSupportFragmentManager().findFragmentById(R.id.container) != null) {
@@ -270,11 +309,55 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        topic topic=new topic();
+        String val = "";
+        topic.noti("","" , val);
+        Log.e("notification_intent",val);
+        if (val.equals("fromjob")){
+            Toast.makeText(MainActivity.this, "Getting from Job section notification  ", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public static void deleteCache(Context context) {
         try {
             File dir = context.getCacheDir();
             deleteDir(dir);
         } catch (Exception e) { e.printStackTrace();}
+    }
+
+    private void OnAddButtonClick() {
+        setVisibility(closed);
+        setAnimation(closed);
+        closed = !closed;
+    }
+    private void setAnimation(boolean closed) {
+        if(!closed){
+            job.startAnimation(fromBottom);
+            post.startAnimation(fromBottom);
+            add.startAnimation(rotateOpen);
+        }else{
+            job.startAnimation(toBottom);
+            post.startAnimation(toBottom);
+            add.startAnimation(rotateClose);
+        }
+    }
+    // used to set visibility to VISIBLE / INVISIBLE
+    private void setVisibility(boolean closed) {
+        if(!closed)
+        {
+            job.setVisibility(View.VISIBLE);
+            post.setVisibility(View.VISIBLE);
+            text2.setVisibility(View.VISIBLE);
+            text1.setVisibility(View.VISIBLE);
+        }else{
+            job.setVisibility(View.GONE);
+            post.setVisibility(View.GONE);
+            text2.setVisibility(View.GONE);
+            text1.setVisibility(View.GONE);
+        }
     }
 
     public static boolean deleteDir(File dir) {
@@ -299,6 +382,14 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+    private void callFragment2(Fragment fragment) {
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        transaction.replace(R.id.change_layout, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }

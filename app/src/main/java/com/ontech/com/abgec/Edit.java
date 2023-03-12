@@ -141,7 +141,7 @@ public class Edit extends AppCompatActivity implements AdapterView.OnItemSelecte
     AutoCompleteTextView branch, passout_yr;
     TextView gend;
 
-    LottieAnimationView animation;
+
     String[] values = {"Service", "Self-Employed", "Retired", "Other"};
     Spinner spino;
 
@@ -159,6 +159,9 @@ public class Edit extends AppCompatActivity implements AdapterView.OnItemSelecte
         Window window = Edit.this.getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(Edit.this, R.color.white));
+
+
+
 
         spino = findViewById(R.id.spinner);
         auth = FirebaseAuth.getInstance();

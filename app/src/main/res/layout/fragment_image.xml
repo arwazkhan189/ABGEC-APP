@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center"
+    android:background="@color/white"
+    android:layout_marginTop="40dp"
+    android:backgroundTint="@color/white"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/lexend"
+        android:gravity="start"
+        android:text="@string/memories_we_made"
+        android:textColor="#212121"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="@+id/idRVImages"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--recycler view for displaying the list of images-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/idRVImages"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView3" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loadImage"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="cloud.json"
+        app:lottie_loop="true" />
+
+    <TextView
+        android:id="@+id/loadText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-80dp"
+        android:fontFamily="@font/lexend"
+        android:gravity="center"
+        android:text="@string/loading_images"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/loadImage"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="@+id/loadImage"
+        app:layout_constraintTop_toBottomOf="@+id/loadImage" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

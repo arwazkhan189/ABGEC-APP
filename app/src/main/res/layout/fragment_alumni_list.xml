@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/swipe_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".AlumniList">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/layoutSearch"
@@ -14,8 +19,9 @@
         android:contentDescription="@string/image"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:layout_margin="20dp"
-        android:padding="8dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -48,16 +54,17 @@
             tools:ignore="RtlSymmetry,TouchTargetSizeCheck" />
     </LinearLayout>
 
-    <ImageView
+    <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/loadImage"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/ic_load_img"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/recyclerView"
-        app:layout_constraintStart_toStartOf="@+id/recyclerView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="cloud.json"
+        app:lottie_loop="true" />
 
     <TextView
         android:id="@+id/loadText"
@@ -66,11 +73,11 @@
         android:fontFamily="@font/lexend"
         android:gravity="center"
         android:text="@string/explore_alumnis_profile"
+        android:layout_marginTop="-80dp"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/loadImage"
         app:layout_constraintStart_toStartOf="@+id/loadImage"
         app:layout_constraintTop_toBottomOf="@+id/loadImage" />
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -86,4 +93,5 @@
         app:layout_constraintTop_toBottomOf="@+id/layoutSearch"
         tools:listitem="@layout/card_layout_alumni" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
